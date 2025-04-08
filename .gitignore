@@ -1,0 +1,43 @@
+# node modules
+node_modules/
+
+# build output
+.next/
+out/
+dist/
+
+# environnement
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# log & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# système
+.DS_Store
+Thumbs.db
+
+# IDE / éditeur
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml
+Dockerfile.dev
+.dockerignore
+
+# Husky
+.husky/_/
+
+# Typescript cache
+*.tsbuildinfo
+
+# OS
+*.swp
