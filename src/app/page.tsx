@@ -1,23 +1,33 @@
-// src/app/page.tsx
-import { prisma } from "@/lib/prisma";
-import Link from "next/link";
+// Page d'accueil - Next.js (App Router)
+// Fichier : src/app/page.tsx
 
-export default async function Home() {
-  const student = await prisma.student.findFirst();
+import { Header } from "@/components/Header";
+import { BottomNav } from "@/components/BottomNav";
+import { FloatingMenu } from "@/components/FloatingMenu";
 
+export default function HomePage() {
   return (
-    <main className="flex flex-col items-center justify-center h-screen p-4">
-      <h1 className="text-3xl font-bold mb-4">Bonjour</h1>
-      <p className="mb-4">
-        Étudiant depuis la base de données :{" "}
-        <strong>{student?.name ?? "aucun étudiant trouvé"}</strong>
-      </p>
-      <Link
-        href="/autre-page"
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-      >
-        Aller vers l&autre page
-      </Link>
+    <main className="relative min-h-screen bg-white pb-28 flex flex-col">
+      <Header userName="Machin" />
+      <section className="px-4 pt-4 space-y-4 flex-grow">
+        <div className="h-28 w-full rounded-xl bg-yellow-400 shadow" />
+        <div className="relative flex items-center justify-center">
+          <button className="absolute left-0 z-10 bg-white p-2 rounded-full shadow">
+            ◀
+          </button>
+          <div className="h-40 w-full max-w-xs rounded-xl bg-rose-400 shadow" />
+          <button className="absolute right-0 z-10 bg-white p-2 rounded-full shadow">
+            ▶
+          </button>
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="min-w-[6rem] h-24 rounded-xl bg-blue-400 shadow" />
+          <div className="min-w-[6rem] h-24 rounded-xl bg-green-400 shadow" />
+          <div className="min-w-[6rem] h-24 rounded-xl bg-rose-400 shadow" />
+        </div>
+      </section>
+      <FloatingMenu />
+      <BottomNav />
     </main>
   );
 }
