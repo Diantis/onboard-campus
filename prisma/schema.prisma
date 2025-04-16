@@ -18,23 +18,24 @@ model User {
   id        String   @id @default(cuid())
   email     String   @unique
   password  String
-  name      String?
+  name      String
   role      Role     @default(STUDENT)
+  address   Address?
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Prof {
+model Address {
   id        String   @id @default(cuid())
-  name      String
-  email     String?  @unique
+  street    String
+  city      String
+  zipCode   String
+  country   String
+  phone     String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
   createdAt DateTime @default(now())
-}
-
-model Student {
-  id        String   @id @default(cuid())
-  name      String
-  email     String?  @unique
-  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {

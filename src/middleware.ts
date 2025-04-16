@@ -4,7 +4,7 @@ import { EdgeAuthService } from './lib/edge-auth';
 
 export async function middleware(request: NextRequest) {
   // Liste des routes publiques
-  const publicRoutes = ['/', '/auth/login', '/auth/register', '/auth/forgot-password'];
+  const publicRoutes = ['/', '/auth/login'];
   
   // Vérifier si la route actuelle est publique
   if (publicRoutes.includes(request.nextUrl.pathname)) {

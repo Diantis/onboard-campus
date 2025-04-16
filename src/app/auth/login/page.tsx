@@ -79,15 +79,6 @@ export default function LoginPage() {
               Se connecter
             </button>
           </div>
-
-          <div className="text-sm text-center">
-            <Link
-              href="/auth/register"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
-              Pas encore de compte ? S&apos;inscrire
-            </Link>
-          </div>
         </form>
       </div>
     </div>

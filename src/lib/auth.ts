@@ -11,8 +11,15 @@ const JWT_SECRET = new TextEncoder().encode(
 type UserWithoutPassword = {
   id: string;
   email: string;
-  name: string | null;
+  name: string;
   role: 'STUDENT' | 'TEACHER' | 'ADMIN';
+  address?: {
+    street: string;
+    city: string;
+    zipCode: string;
+    country: string;
+    phone: string | null;
+  };
 };
 
 export class AuthService {
@@ -44,6 +51,15 @@ export class AuthService {
         email: true,
         name: true,
         role: true,
+        address: {
+          select: {
+            street: true,
+            city: true,
+            zipCode: true,
+            country: true,
+            phone: true,
+          },
+        },
       },
     });
   }
@@ -57,6 +73,15 @@ export class AuthService {
         name: true,
         role: true,
         password: true,
+        address: {
+          select: {
+            street: true,
+            city: true,
+            zipCode: true,
+            country: true,
+            phone: true,
+          },
+        },
       },
     });
 
