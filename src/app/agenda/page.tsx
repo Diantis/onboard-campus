@@ -1,4 +1,11 @@
 // src/app/agenda/page.tsx
-export default function AgendaPage() {
-  return <h1 className="p-4">Page Agenda 📅</h1>;
+import CalendarAdmin from "@/components/CalendarAdmin";
+
+export default function AdminPage() {
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Agenda Administrateur</h1>
+      <CalendarAdmin />
+    </div>
+  );
 }
