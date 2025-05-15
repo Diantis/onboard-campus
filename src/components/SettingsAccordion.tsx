@@ -2,37 +2,44 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function SettingsAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const settingsItems = [
-    { title: "🔧 Mon compte", content: "Ici tu peux accéder à ton profil." },
-    {
-      title: "🌐 Services",
-      content:
-        "Retrouve le détails de tous les services proposés par l'université.",
-    },
-    {
-      title: "🔒 Sécurité & Confidentialité",
-      content: "Modifie les paramètres de sécurité et de confidentialité.",
-    },
-    {
-      title: "🖥️ Affichage & Thème",
-      content: "Personnalise l'affichage et le thème de l'application.",
-    },
-    {
-      title: "📅 Calendrier",
-      content: "Gère tes événements et ton emploi du temps.",
-    },
-  ];
+  const { t, i18n } = useTranslation();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const toggleLocale = () => {
+    i18n.changeLanguage(i18n.language === "fr" ? "en" : "fr");
+  };
+
+  const settingsItems = [
+    {
+      title: "🖥️" + t("displayTheme"),
+      content: t("displayTheme"),
+    },
+    {
+      title: "🌐" + t("language"),
+      content: (
+        <button
+          onClick={toggleLocale}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          {i18n.language === "fr" ? t("switchToEnglish") : t("switchToFrench")}
+        </button>
+      ),
+    },
+    {
+      title: "🔒" + t("securityPrivacy"),
+      content: t("securityPrivacy"),
+    },
+  ];
+
   return (
-    <div className="w-full max-w-xl mx-auto mt-5 space-y-2">
+    <div className="m-5 space-y-2">
       {settingsItems.map((item, index) => (
         <div
           key={index}
