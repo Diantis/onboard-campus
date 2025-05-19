@@ -6,21 +6,27 @@ const resources = {
     translation: {
       displayTheme: "Personnalise l'affichage et le thème de l'application.",
       language: "Langue",
-      switchToEnglish: "Passer en anglais",
-      switchToFrench: "Passer en français",
+      english: "Anglais",
+      french: "Français",
       securityPrivacy:
         "Modifie les paramètres de sécurité et de confidentialité.",
       welcome: "Bienvenue sur l'application !",
+      Agenda: {
+        Today: "Aujourd'hui",
+      },
     },
   },
   en: {
     translation: {
       displayTheme: "Customize the display and theme of the application.",
       language: "Language",
-      switchToEnglish: "Switch to English",
-      switchToFrench: "Switch to French",
+      english: "English",
+      french: "French",
       securityPrivacy: "Modify security and privacy settings.",
       welcome: "Welcome to the app!",
+      Agenda: {
+        Today: "Today",
+      },
     },
   },
 };

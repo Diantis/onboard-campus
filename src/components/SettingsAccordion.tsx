@@ -3,17 +3,14 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import SwitchLanguage from "./SwitchLanguage";
 
 export default function SettingsAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const toggleLocale = () => {
-    i18n.changeLanguage(i18n.language === "fr" ? "en" : "fr");
   };
 
   const settingsItems = [
@@ -23,14 +20,7 @@ export default function SettingsAccordion() {
     },
     {
       title: "🌐" + t("language"),
-      content: (
-        <button
-          onClick={toggleLocale}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-        >
-          {i18n.language === "fr" ? t("switchToEnglish") : t("switchToFrench")}
-        </button>
-      ),
+      content: <SwitchLanguage />,
     },
     {
       title: "🔒" + t("securityPrivacy"),
