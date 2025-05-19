@@ -1,9 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 import { useTranslation } from "react-i18next";
 
 export default function Component() {

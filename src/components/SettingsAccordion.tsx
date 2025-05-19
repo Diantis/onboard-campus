@@ -1,8 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Monitor, Globe, Lock, SunIcon } from "lucide-react";
+import {
+  Bell,
+  CircleHelp,
+  ChevronDown,
+  Globe,
+  Lock,
+  Monitor,
+  SunIcon,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 import SwitchLanguage from "./SwitchLanguage";
 import SwitchMode from "./SwitchMode";
 
@@ -16,12 +25,9 @@ export default function SettingsAccordion() {
 
   const settingsItems = [
     {
-      title: (
-        <div className="flex items-center gap-2">
-          <Monitor size={18} />
-          {t("Settings.myAccount")}
-        </div>
-      ),
+      title: t("Settings.myAccount"),
+      href: "/profil",
+      icon: <Monitor size={18} />,
     },
     {
       title: (
@@ -44,22 +50,48 @@ export default function SettingsAccordion() {
     {
       title: (
         <div className="flex items-center gap-2">
+          <Bell size={18} />
+          {t("Settings.notifications")}
+        </div>
+      ),
+      content: t("Settings.notifications"),
+    },
+    {
+      title: (
+        <div className="flex items-center gap-2">
           <Lock size={18} />
           {t("Settings.securityPrivacy")}
         </div>
       ),
       content: t("Settings.securityPrivacy"),
     },
+    {
+      title: (
+        <div className="flex items-center gap-2">
+          <CircleHelp size={18} />
+          {t("Settings.helpCenter")}
+        </div>
+      ),
+      content: t("Settings.helpCenter"),
+    },
   ];
 
   return (
-    <div className="m-5 space-y-2">
+    <div className="md:md:mx-50 m-5 space-y-2">
       {settingsItems.map((item, index) => (
         <div
           key={index}
           className="border border-gray-300 rounded-lg overflow-hidden"
         >
-          {item.content ? (
+          {item.href ? (
+            <Link
+              href={item.href}
+              className="w-full flex items-center gap-2 p-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200"
+            >
+              {item.icon}
+              <span>{item.title}</span>
+            </Link>
+          ) : item.content ? (
             <>
               <button
                 onClick={() => toggleAccordion(index)}
@@ -72,7 +104,6 @@ export default function SettingsAccordion() {
                   }`}
                 />
               </button>
-
               <div
                 className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
                   openIndex === index ? "max-h-[500px]" : "max-h-0"
