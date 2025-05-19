@@ -4,28 +4,32 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   fr: {
     translation: {
-      displayTheme: "Personnalise l'affichage et le thème de l'application.",
-      language: "Langue",
       english: "Anglais",
       french: "Français",
-      securityPrivacy:
-        "Modifie les paramètres de sécurité et de confidentialité.",
-      welcome: "Bienvenue sur l'application !",
       Agenda: {
         Today: "Aujourd'hui",
+      },
+      Settings: {
+        language: "Changer la langue",
+        lightMode: "Mode sombre",
+        myAccount: "Mon Compte",
+        securityPrivacy: "Sécurité et Confidentialité",
       },
     },
   },
   en: {
     translation: {
       displayTheme: "Customize the display and theme of the application.",
-      language: "Language",
       english: "English",
       french: "French",
-      securityPrivacy: "Modify security and privacy settings.",
-      welcome: "Welcome to the app!",
       Agenda: {
         Today: "Today",
+      },
+      Settings: {
+        language: "Change Language",
+        lightMode: "Dark mode",
+        myAccount: "My Account",
+        securityPrivacy: "Security and Privacy",
       },
     },
   },

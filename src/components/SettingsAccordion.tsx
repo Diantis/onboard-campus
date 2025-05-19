@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Monitor, Globe, Lock, SunIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import SwitchLanguage from "./SwitchLanguage";
+import SwitchMode from "./SwitchMode";
 
 export default function SettingsAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -15,16 +16,39 @@ export default function SettingsAccordion() {
 
   const settingsItems = [
     {
-      title: "🖥️" + t("displayTheme"),
-      content: t("displayTheme"),
+      title: (
+        <div className="flex items-center gap-2">
+          <Monitor size={18} />
+          {t("Settings.myAccount")}
+        </div>
+      ),
     },
     {
-      title: "🌐" + t("language"),
+      title: (
+        <div className="flex items-center gap-2">
+          <Globe size={18} />
+          {t("Settings.language")}
+        </div>
+      ),
       content: <SwitchLanguage />,
     },
     {
-      title: "🔒" + t("securityPrivacy"),
-      content: t("securityPrivacy"),
+      title: (
+        <div className="flex items-center gap-2">
+          <SunIcon size={18} />
+          {t("Settings.lightMode")}
+        </div>
+      ),
+      content: <SwitchMode />,
+    },
+    {
+      title: (
+        <div className="flex items-center gap-2">
+          <Lock size={18} />
+          {t("Settings.securityPrivacy")}
+        </div>
+      ),
+      content: t("Settings.securityPrivacy"),
     },
   ];
 
@@ -35,25 +59,33 @@ export default function SettingsAccordion() {
           key={index}
           className="border border-gray-300 rounded-lg overflow-hidden"
         >
-          <button
-            onClick={() => toggleAccordion(index)}
-            className="w-full flex justify-between items-center text-left p-3 bg-gray-100 hover:bg-gray-200 focus:outline-none transition-all duration-200"
-          >
-            {item.title}
-            <ChevronDown
-              className={`transition-transform duration-300 ${
-                openIndex === index ? "rotate-180" : ""
-              }`}
-            />
-          </button>
+          {item.content ? (
+            <>
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex justify-between items-center text-left p-3 bg-gray-100 hover:bg-gray-200 focus:outline-none transition-all duration-200"
+              >
+                {item.title}
+                <ChevronDown
+                  className={`transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-          <div
-            className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
-              openIndex === index ? "max-h-[500px]" : "max-h-0"
-            }`}
-          >
-            <div className="p-3 bg-gray-50 border-gray-300">{item.content}</div>
-          </div>
+              <div
+                className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
+                  openIndex === index ? "max-h-[500px]" : "max-h-0"
+                }`}
+              >
+                <div className="p-3 bg-gray-50 border-gray-300">
+                  {item.content}
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="p-3 bg-gray-100">{item.title}</div>
+          )}
         </div>
       ))}
     </div>
