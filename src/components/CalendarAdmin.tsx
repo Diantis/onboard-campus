@@ -1,17 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import {
-  EventCalendar,
-  type CalendarEvent,
-} from "@/components/event-calendar"; // adapte le chemin si nécessaire
+import { EventCalendar, type CalendarEvent } from "@/components/event-calendar";
 
-import {
-  addDays,
-  setHours,
-  setMinutes,
-  subDays,
-} from "date-fns";
+import { setHours, setMinutes, subDays } from "date-fns";
 
 const sampleEvents: CalendarEvent[] = [
   {
