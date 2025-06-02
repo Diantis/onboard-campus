@@ -26,7 +26,7 @@ export function EditableField({ label, value, onChange }: EditableFieldProps) {
   };
 
   return (
-    <div className="flex items-start gap-2">
+    <div className="flex flex-col gap-1 max-w-sm">
       <p className="font-medium">{label}</p>
       {isEditing ? (
         <input
