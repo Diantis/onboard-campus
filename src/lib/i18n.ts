@@ -44,7 +44,8 @@ const resources = {
       Settings: {
         helpCenter: "Centre d'aide",
         language: "Changer la langue",
-        lightMode: "Mode sombre",
+        darkMode: "Mode sombre",
+        lightMode: "Mode clair",
         myAccount: "Mon compte",
         notifications: "Notifications",
         securityPrivacy: "Sécurité et confidentialité",
@@ -94,7 +95,8 @@ const resources = {
       Settings: {
         helpCenter: "Help center",
         language: "Change language",
-        lightMode: "Dark mode",
+        darkMode: "Dark mode",
+        lightMode: "Light mode",
         myAccount: "My account",
         notifications: "Notifications",
         securityPrivacy: "Security and privacy",
