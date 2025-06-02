@@ -5,6 +5,7 @@ import { Pencil } from "lucide-react";
 
 interface PasswordFieldProps {
   label: string;
+  value: string;
   onChange: (newPassword: string) => void;
 }
 
@@ -23,7 +24,6 @@ export function PasswordField({ label, onChange }: PasswordFieldProps) {
       setError("Veuillez saisir un nouveau mot de passe.");
       return;
     }
-
     onChange(newPassword);
     setIsEditing(false);
     setOldPassword("");
