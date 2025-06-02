@@ -1,14 +1,9 @@
 // Page d'accueil - Next.js (App Router)
 // Fichier : src/app/page.tsx
 
-import { Header } from "@/components/Header";
-import { BottomNav } from "@/components/BottomNav";
-import { FloatingMenu } from "@/components/FloatingMenu";
-
 export default function HomePage() {
   return (
     <main className="relative min-h-screen bg-white pb-28 flex flex-col">
-      <Header userName="Machin" />
       <section className="px-4 pt-4 space-y-4 flex-grow">
         <div className="h-28 w-full rounded-xl bg-yellow-400 shadow" />
         <div className="relative flex items-center justify-center">
@@ -26,7 +21,6 @@ export default function HomePage() {
           <div className="min-w-[6rem] h-24 rounded-xl bg-rose-400 shadow" />
         </div>
       </section>
-      <BottomNav />
     </main>
   );
 }

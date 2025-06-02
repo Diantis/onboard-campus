@@ -4,9 +4,6 @@ import { IoBook } from "react-icons/io5";
 import { FaHandshake } from "react-icons/fa";
 import { FaSchool } from "react-icons/fa6";
 import { BiHealth } from "react-icons/bi";
-import { Header } from "@/components/Header";
-import { BottomNav } from "@/components/BottomNav";
-import { FloatingMenu } from "@/components/FloatingMenu";
 
 const serviceItems = [
   {
@@ -56,7 +53,6 @@ const serviceItems = [
 const Page = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header userName="Machin" />
       <main className="flex-grow">
         <div className="w-full md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 rounded-lg mx-auto my-8">
           {serviceItems.map((item) => {
@@ -76,8 +72,6 @@ const Page = () => {
           })}
         </div>
       </main>
-      <FloatingMenu />
-      <BottomNav />
     </div>
   );
 };
