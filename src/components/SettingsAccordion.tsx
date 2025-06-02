@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Bell,
   CircleHelp,
@@ -8,86 +8,51 @@ import {
   Globe,
   Lock,
   Monitor,
-  SunIcon,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import SwitchLanguage from "./SwitchLanguage";
-import SwitchMode from "./SwitchMode";
+import { ModeToggle } from "./ModeToggle";
+import { useTheme } from "next-themes";
 
 export default function SettingsAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { t } = useTranslation();
+  const { theme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const themeTitle = (
+    <div className="flex items-center gap-2">
+      {isMounted && theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
+      {isMounted && theme === "dark" ? t("Settings.darkMode") : t("Settings.lightMode")}
+    </div>
+  );
+
   const settingsItems = [
-    {
-      title: t("Settings.myAccount"),
-      href: "/profil",
-      icon: <Monitor size={18} />,
-    },
-    {
-      title: (
-        <div className="flex items-center gap-2">
-          <Globe size={18} />
-          {t("Settings.language")}
-        </div>
-      ),
-      content: <SwitchLanguage />,
-    },
-    {
-      title: (
-        <div className="flex items-center gap-2">
-          <SunIcon size={18} />
-          {t("Settings.lightMode")}
-        </div>
-      ),
-      content: <SwitchMode />,
-    },
-    {
-      title: (
-        <div className="flex items-center gap-2">
-          <Bell size={18} />
-          {t("Settings.notifications")}
-        </div>
-      ),
-      content: t("Settings.notifications"),
-    },
-    {
-      title: (
-        <div className="flex items-center gap-2">
-          <Lock size={18} />
-          {t("Settings.securityPrivacy")}
-        </div>
-      ),
-      content: t("Settings.securityPrivacy"),
-    },
-    {
-      title: (
-        <div className="flex items-center gap-2">
-          <CircleHelp size={18} />
-          {t("Settings.helpCenter")}
-        </div>
-      ),
-      content: t("Settings.helpCenter"),
-    },
+    { title: t("Settings.myAccount"), href: "/profil", icon: <Monitor size={18} /> },
+    { title: <div className="flex items-center gap-2"><Globe size={18} />{t("Settings.language")}</div>, content: <SwitchLanguage /> },
+    { title: themeTitle, content: <ModeToggle /> },
+    { title: <div className="flex items-center gap-2"><Bell size={18} />{t("Settings.notifications")}</div>, content: t("Settings.notifications") },
+    { title: <div className="flex items-center gap-2"><Lock size={18} />{t("Settings.securityPrivacy")}</div>, content: t("Settings.securityPrivacy") },
+    { title: <div className="flex items-center gap-2"><CircleHelp size={18} />{t("Settings.helpCenter")}</div>, content: t("Settings.helpCenter") },
   ];
 
   return (
-    <div className="md:md:mx-50 m-5 space-y-2">
+    <div className="md:mx-50 m-5 space-y-2">
       {settingsItems.map((item, index) => (
-        <div
-          key={index}
-          className="border border-gray-300 rounded-lg overflow-hidden"
-        >
+        <div key={index} className="border border-border rounded-lg overflow-hidden">
           {item.href ? (
-            <Link
-              href={item.href}
-              className="w-full flex items-center gap-2 p-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200"
-            >
+            <Link href={item.href} className="w-full flex items-center gap-2 p-3 bg-muted hover:bg-muted-foreground/10 transition-all duration-200">
               {item.icon}
               <span>{item.title}</span>
             </Link>
@@ -95,27 +60,17 @@ export default function SettingsAccordion() {
             <>
               <button
                 onClick={() => toggleAccordion(index)}
-                className="w-full flex justify-between items-center text-left p-3 bg-gray-100 hover:bg-gray-200 focus:outline-none transition-all duration-200"
+                className="w-full flex justify-between items-center text-left p-3 bg-muted hover:bg-muted-foreground/10 focus:outline-none transition-all duration-200"
               >
                 {item.title}
-                <ChevronDown
-                  className={`transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
+                <ChevronDown className={`transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`} />
               </button>
-              <div
-                className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
-                  openIndex === index ? "max-h-[500px]" : "max-h-0"
-                }`}
-              >
-                <div className="p-3 bg-gray-50 border-gray-300">
-                  {item.content}
-                </div>
+              <div className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${openIndex === index ? "max-h-[500px]" : "max-h-0"}`}>
+                <div className="p-3 bg-background border-t border-border">{item.content}</div>
               </div>
             </>
           ) : (
-            <div className="p-3 bg-gray-100">{item.title}</div>
+            <div className="p-3 bg-muted">{item.title}</div>
           )}
         </div>
       ))}

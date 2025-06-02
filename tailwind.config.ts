@@ -3,17 +3,17 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/**/*.{ts,tsx}",  // Scanne tous tes fichiers TypeScript dans src
-    "./node_modules/@originui/**/*.{js,ts,jsx,tsx}", // Au cas où OriginUI y est installé
+    "./src/**/*.{ts,tsx}",
+    "./node_modules/@originui/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // Exemples de tokens shadcn/origin
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: "hsl(var(--primary))",
-        muted: "hsl(var(--muted))",
+        background: "oklch(var(--background))",
+        foreground: "oklch(var(--foreground))",
+        primary: "oklch(var(--primary))",
+        muted: "oklch(var(--muted))",
       },
     },
   },
