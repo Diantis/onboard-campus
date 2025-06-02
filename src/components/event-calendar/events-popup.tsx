@@ -5,6 +5,7 @@ import { format, isSameDay } from "date-fns"
 import { XIcon } from "lucide-react"
 
 import { EventItem, type CalendarEvent } from "@/components/event-calendar"
+import { useDateFnsLocale } from "@/components/event-calendar/hooks/use-date-fns-locale";
 
 interface EventsPopupProps {
   date: Date
@@ -22,6 +23,7 @@ export function EventsPopup({
   onEventSelect,
 }: EventsPopupProps) {
   const popupRef = useRef<HTMLDivElement>(null)
+  const locale = useDateFnsLocale();
 
   // Handle click outside to close popup
   useEffect(() => {
@@ -93,7 +95,7 @@ export function EventsPopup({
       }}
     >
       <div className="bg-background sticky top-0 flex items-center justify-between border-b p-3">
-        <h3 className="font-medium">{format(date, "d MMMM yyyy")}</h3>
+        <h3 className="font-medium">{format(date, "d MMMM yyyy", { locale })}</h3>
         <button
           onClick={onClose}
           className="hover:bg-muted rounded-full p-1"
@@ -105,7 +107,7 @@ export function EventsPopup({
 
       <div className="space-y-2 p-3">
         {events.length === 0 ? (
-          <div className="text-muted-foreground py-2 text-sm">No events</div>
+          <div className="text-muted-foreground py-2 text-sm">{t("Agenda.noEventsTitle")}</div>
         ) : (
           events.map((event) => {
             const eventStart = new Date(event.start)

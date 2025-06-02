@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { RiCalendarLine, RiDeleteBinLine } from "@remixicon/react";
 import { format, isBefore } from "date-fns";
 import { useTranslation } from "react-i18next";
+import { useDateFnsLocale } from "@/components/event-calendar/hooks/use-date-fns-locale";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -68,6 +69,7 @@ export function EventDialog({
   const [startDateOpen, setStartDateOpen] = useState(false);
   const [endDateOpen, setEndDateOpen] = useState(false);
   const { t } = useTranslation();
+  const locale = useDateFnsLocale();
 
   // Debug log to check what event is being passed
   useEffect(() => {
@@ -124,7 +126,7 @@ export function EventDialog({
         const value = `${formattedHour}:${formattedMinute}`;
         // Use a fixed date to avoid unnecessary date object creations
         const date = new Date(2000, 0, 1, hour, minute);
-        const label = format(date, "h:mm a");
+        const label = format(date, "h:mm a", { locale });
         options.push({ value, label });
       }
     }
@@ -290,7 +292,7 @@ export function EventDialog({
                       )}
                     >
                       {startDate
-                        ? format(startDate, "PPP")
+                        ? format(startDate, "PPP", { locale })
                         : t("Agenda.PickAdate")}
                     </span>
                     <RiCalendarLine
@@ -359,7 +361,7 @@ export function EventDialog({
                         !endDate && "text-muted-foreground",
                       )}
                     >
-                      {endDate ? format(endDate, "PPP") : "Pick a date"}
+                      {endDate ? format(endDate, "PPP", { locale }) : t("Agenda.PickAdate")}
                     </span>
                     <RiCalendarLine
                       size={16}
