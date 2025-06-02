@@ -3,7 +3,7 @@ import { FloatingMenu } from "@/components/FloatingMenu";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { FaHandshake } from "react-icons/fa";
+import { IoIosSchool } from "react-icons/io";
 
 const page = () => {
   return (
@@ -26,14 +26,12 @@ const page = () => {
           <div
             className="
               p-6 rounded-xl flex flex-col items-center justify-center text-center
-              shadow-lg min-h-[180px] bg-[FDC700] text-white
-              w-44 md:w-56
+              shadow-lg min-h-[180px] bg-[#FDC700] text-white
+              w-full md:w-56
             "
           >
-            <FaHandshake size={68} />
-            <h2 className="text-white font-semibold text-lg mt-3">
-              Vie Associative
-            </h2>
+            <IoIosSchool size={68} />
+            <h2 className="text-white font-semibold text-lg mt-3">Tutorat</h2>
           </div>
           <div
             className="
@@ -56,12 +54,12 @@ const page = () => {
 
         <article className="max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-8 text-gray-900 text-center md:text-left">
-            Tout savoir sur la vie associative
+            Tout savoir sur la tutorat
           </h1>
 
           <section className="space-y-4">
             <div>
-              <h2 className="text-2xl font-semibold text-[FDC700] mb-3 mt-6">
+              <h2 className="text-2xl font-semibold text-[#FDC700] mb-3 mt-6">
                 Introduction
               </h2>
               <p className="text-gray-700 leading-relaxed">
@@ -73,7 +71,7 @@ const page = () => {
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold text-[FDC700] mb-3 mt-6">
+              <h2 className="text-2xl font-semibold text-[#FDC700] mb-3 mt-6">
                 Les démarches administratives
               </h2>
               <p className="mb-3 text-gray-700 leading-relaxed">
@@ -90,7 +88,7 @@ const page = () => {
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold text-[FDC700] mb-3 mt-6">
+              <h2 className="text-2xl font-semibold text-[#FDC700] mb-3 mt-6">
                 Conseils pour réussir
               </h2>
               <p className="text-gray-700 leading-relaxed">
@@ -98,7 +96,7 @@ const page = () => {
                 Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi
                 aliquam nisi, nec dictum urna quam nec urna.
               </p>
-              <blockquote className="border-l-4 border-[FDC700] pl-4 py-3 my-5 italic text-gray-600 bg-blue-50 rounded-r-md">
+              <blockquote className="border-l-4 border-[#FDC700] pl-4 py-3 my-5 italic text-gray-600 bg-blue-50 rounded-r-md">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </blockquote>
               <p className="text-gray-700 leading-relaxed">

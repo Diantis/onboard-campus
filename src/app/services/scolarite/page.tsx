@@ -27,7 +27,7 @@ const page = () => {
             className="
               p-6 rounded-xl flex flex-col items-center justify-center text-center
               shadow-lg min-h-[180px] bg-[#00BCFF] text-white
-              w-44 md:w-56
+              w-full md:w-56
             "
           >
             <FaSchool size={68} />
