@@ -1,8 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Header } from "@/components/Header";
-import { BottomNav } from "@/components/BottomNav";
 import { useState } from "react";
 
 const MapComponent = dynamic(() => import("../../components/MapComponent"), {
@@ -25,8 +23,6 @@ export default function MapPage() {
 
   return (
     <main className="relative min-h-screen bg-white pb-28 flex flex-col">
-      <Header userName="Machin" />
-
       <div className="max-w-7xl mx-auto p-5 flex-grow w-full">
         <h1 className="text-3xl font-bold text-gray-800 mb-5 pb-2 border-b border-gray-200">
           Campus Navigation
@@ -60,8 +56,6 @@ export default function MapPage() {
           {activeTab === "map" ? <MapComponent /> : <FloorPlanComponent />}
         </div>
       </div>
-
-      <BottomNav />
     </main>
   );
 }

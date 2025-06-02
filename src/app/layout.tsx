@@ -2,6 +2,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { BottomNav } from "@/components/BottomNav";
+import { Header } from "@/components/Header";
+
 
 export const metadata: Metadata = {
   title: "Onboarding Campus",
@@ -16,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
 			<body>
+				<Header userName="Machin" />
 				<Providers>{children}</Providers>
+				<BottomNav/>
 			</body>
     </html>
   );
