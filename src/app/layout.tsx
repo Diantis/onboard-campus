@@ -2,7 +2,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Onboarding Campus",
@@ -16,17 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-		
-		<ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
 			<body>
 				<Providers>{children}</Providers>
 			</body>
-        </ThemeProvider>
     </html>
   );
 }

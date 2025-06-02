@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Bell,
   CircleHelp,
@@ -8,25 +8,40 @@ import {
   Globe,
   Lock,
   Monitor,
-  SunIcon,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import SwitchLanguage from "./SwitchLanguage";
 import { ModeToggle } from "./ModeToggle";
+import { useTheme } from "next-themes";
 
 export default function SettingsAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { t } = useTranslation();
+  const { theme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const themeTitle = (
+    <div className="flex items-center gap-2">
+      {isMounted && theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
+      {isMounted && theme === "dark" ? t("Settings.darkMode") : t("Settings.lightMode")}
+    </div>
+  );
+
   const settingsItems = [
     { title: t("Settings.myAccount"), href: "/profil", icon: <Monitor size={18} /> },
     { title: <div className="flex items-center gap-2"><Globe size={18} />{t("Settings.language")}</div>, content: <SwitchLanguage /> },
-    { title: <div className="flex items-center gap-2"><SunIcon size={18} />{t("Settings.lightMode")}</div>, content: <ModeToggle /> },
+    { title: themeTitle, content: <ModeToggle /> },
     { title: <div className="flex items-center gap-2"><Bell size={18} />{t("Settings.notifications")}</div>, content: t("Settings.notifications") },
     { title: <div className="flex items-center gap-2"><Lock size={18} />{t("Settings.securityPrivacy")}</div>, content: t("Settings.securityPrivacy") },
     { title: <div className="flex items-center gap-2"><CircleHelp size={18} />{t("Settings.helpCenter")}</div>, content: t("Settings.helpCenter") },
@@ -62,4 +77,3 @@ export default function SettingsAccordion() {
     </div>
   );
 }
-

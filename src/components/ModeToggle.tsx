@@ -1,38 +1,43 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useTranslation } from "react-i18next"
-import { Button } from "@/components/ui/button"
-import {
-DropdownMenu,
-DropdownMenuContent,
-DropdownMenuItem,
-DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Sun, Moon } from "lucide-react"
 
 export function ModeToggle() {
-const { setTheme } = useTheme()
-const { t } = useTranslation();
-return (
-	<DropdownMenu>
-	<DropdownMenuTrigger asChild>
-		<Button variant="outline" size="icon">
-		<Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-		<Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-		<span className="sr-only">Toggle theme</span>
-		</Button>
-	</DropdownMenuTrigger>
-	<DropdownMenuContent align="end">
-		<DropdownMenuItem onClick={() => setTheme("light")}>
-			{t("Settings.lightMode")}
-		</DropdownMenuItem>
-		<DropdownMenuItem onClick={() => setTheme("dark")}>
-			{t("Settings.darkMode")}
-		</DropdownMenuItem>
-	</DropdownMenuContent>
-	</DropdownMenu>
-)
+  const { theme, setTheme } = useTheme()
+  const { t } = useTranslation()
+
+  const [selectedValue, setSelectedValue] = React.useState(theme === "dark" ? "on" : "off")
+
+  React.useEffect(() => {
+    setSelectedValue(theme === "dark" ? "on" : "off")
+  }, [theme])
+
+  const handleThemeChange = (value: string) => {
+    setSelectedValue(value)
+    setTheme(value === "on" ? "dark" : "light")
+  }
+
+  return (
+    <div className="bg-input/50 inline-flex h-9 rounded-md p-0.5">
+      <RadioGroup
+        value={selectedValue}
+        onValueChange={handleThemeChange}
+        className="group after:bg-background has-focus-visible:after:border-ring has-focus-visible:after:ring-ring/50 relative inline-grid grid-cols-[1fr_1fr] items-center gap-0 text-sm font-medium after:absolute after:inset-y-0 after:w-1/2 after:rounded-sm after:shadow-xs after:transition-[translate,box-shadow] after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] has-focus-visible:after:ring-[3px] data-[state=off]:after:translate-x-0 data-[state=on]:after:translate-x-full"
+        data-state={selectedValue}
+      >
+        <label className="group-data-[state=on]:text-muted-foreground/70 relative z-10 inline-flex h-full min-w-8 cursor-pointer items-center justify-center px-4 whitespace-nowrap transition-colors select-none">
+          <Sun className="h-[1.2rem] w-[1.2rem]" />
+          <RadioGroupItem id="theme-light" value="off" className="sr-only" />
+        </label>
+        <label className="group-data-[state=off]:text-muted-foreground/70 relative z-10 inline-flex h-full min-w-8 cursor-pointer items-center justify-center px-4 whitespace-nowrap transition-colors select-none">
+          <Moon className="h-[1.2rem] w-[1.2rem]" />
+          <RadioGroupItem id="theme-dark" value="on" className="sr-only" />
+        </label>
+      </RadioGroup>
+    </div>
+  )
 }
