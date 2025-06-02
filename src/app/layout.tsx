@@ -2,6 +2,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Onboarding Campus",
@@ -14,10 +15,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+    <html lang="fr" suppressHydrationWarning>
+		
+		<ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+			<body>
+				<Providers>{children}</Providers>
+			</body>
+        </ThemeProvider>
     </html>
   );
 }
