@@ -26,7 +26,6 @@ export default function HomePage() {
           <div className="min-w-[6rem] h-24 rounded-xl bg-rose-400 shadow" />
         </div>
       </section>
-      <FloatingMenu />
       <BottomNav />
     </main>
   );

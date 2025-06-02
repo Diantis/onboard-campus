@@ -1,8 +1,8 @@
-// BottomNav.tsx
 // src/components/BottomNav.tsx
 "use client";
 import { Home, Calendar, Map, User } from "lucide-react";
 import Link from "next/link";
+import { FloatingMenu } from "@/components/FloatingMenu";
 
 export function BottomNav() {
   return (
@@ -13,9 +13,10 @@ export function BottomNav() {
       <Link href="/agenda">
         <Calendar className="w-6 h-6" />
       </Link>
-      <div className="w-12 h-12 rounded-full bg-violet-600 flex items-center justify-center text-white text-2xl -mt-10 shadow">
-        +
-      </div>
+
+      {/* Ici le FloatingMenu centré avec margin-top négative */}
+      <FloatingMenu className="-mt-10 flex-shrink-0" />
+
       <Link href="/map">
         <Map className="w-6 h-6" />
       </Link>

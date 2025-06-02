@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  EventCalendar,
-  type CalendarEvent,
-} from "@/components/event-calendar";
+import { EventCalendar, type CalendarEvent } from "@/components/event-calendar";
 
-import {
-  addDays,
-  setHours,
-  setMinutes,
-} from "date-fns";
+import { addDays } from "date-fns";
 
 const userEvents: CalendarEvent[] = [
   {
@@ -30,7 +23,7 @@ export default function CalendarUser() {
       onEventAdd={() => {}}
       onEventUpdate={() => {}}
       onEventDelete={() => {}}
-      editable={false} // désactive drag, resize, clic, etc.
+      editable={false}
     />
   );
 }
