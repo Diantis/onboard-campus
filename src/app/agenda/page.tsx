@@ -1,4 +1,6 @@
 // src/app/agenda/page.tsx
+"use client";
+
 import CalendarAdmin from "@/components/CalendarAdmin";
 
 export default function AdminPage() {

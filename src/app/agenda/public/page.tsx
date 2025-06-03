@@ -1,3 +1,7 @@
+// src/app/agenda/public/page.tsx
+
+"use client";
+
 import CalendarUser from "@/components/CalendarUser";
 
 export default function PublicAgendaPage() {

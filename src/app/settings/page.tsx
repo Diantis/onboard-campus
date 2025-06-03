@@ -1,4 +1,6 @@
 // src/app/settings/page.tsx
+"use client";
+
 import SettingsAccordion from "@/components/SettingsAccordion";
 import { Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
