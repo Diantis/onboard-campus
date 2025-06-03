@@ -6,6 +6,7 @@ import { EditableField } from "@/components/EditableField";
 import { PasswordField } from "@/components/PasswordField";
 import { AutocompleteAddress } from "@/components/AutocompleteAddress";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilPage() {
   const [name, setName] = useState("");
@@ -16,15 +17,16 @@ export default function ProfilPage() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [avatar, setAvatar] = useState("/avatar-72-01.jpg");
+  const [avatar, setAvatar] = useState("/avatar.jpg");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch("../api/profil")
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Erreur de récupération du profil");
+          throw new Error(t("Profil.error"));
         }
         return res.json();
       })
@@ -36,11 +38,10 @@ export default function ProfilPage() {
         setEmail(data.email ?? "Email inconnu");
         setPhone(data.phone ?? "Téléphone inconnu");
         setAddress(data.address ?? "Adresse inconnue");
-        setAvatar(data.avatarUrl ?? "/avatar-72-01.jpg");
+        setAvatar(data.avatarUrl ?? "/avatar.jpg");
       })
       .catch((err) => {
         console.error(err);
-        // Optionnel: set des valeurs par défaut si erreur
         setName("Nom inconnu");
         setCourse("Aucun cursus");
         setYear("Aucune année");
@@ -72,25 +73,30 @@ export default function ProfilPage() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <h1 className="md:mx-50 m-5 text-2xl font-bold mb-4 flex items-center gap-2">
         <CircleUserRound className="w-6 h-6" />
-        Mon Profil
+        {t("Profil.title")}
       </h1>
 
       <main className="md:mx-50 m-5 flex-1 flex flex-col justify-start space-y-8">
         <div className="relative w-full">
           <div className="h-40 bg-amber-400 rounded-lg shadow-md" />
-          <div className="absolute -bottom-12 left-6 group">
+          <div className="absolute left-6 -bottom-16 w-32 h-32 group">
             <Image
               src={avatar}
+              width={128}
+              height={128}
               alt="Avatar"
-              className="w-32 h-32 rounded-full border-4 border-background shadow-lg object-cover"
+              className="rounded-full object-cover border-4 border-background shadow-lg w-full h-full"
+              priority
             />
+
             <button
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 rounded-full text-white"
               onClick={() => fileInputRef.current?.click()}
-              aria-label="Changer la photo de profil"
+              aria-label={t("Profil.changePic")}
             >
               <Pencil size={20} />
             </button>
+
             <input
               ref={fileInputRef}
               type="file"
@@ -100,7 +106,6 @@ export default function ProfilPage() {
             />
           </div>
         </div>
-
         <div className="mt-4 bg-card shadow-md rounded-lg p-6 space-y-4">
           <h2 className="text-2xl font-bold">{name}</h2>
           <div className="flex flex-col md:flex-row gap-8">
@@ -109,7 +114,7 @@ export default function ProfilPage() {
               <p className="text-muted-foreground">{year}</p>
               <p className="text-muted-foreground">{ine}</p>
               <PasswordField
-                label="Mot de Passe"
+                label={t("Profil.password")}
                 value={password}
                 onChange={(val) => {
                   setPassword(val);
@@ -123,7 +128,7 @@ export default function ProfilPage() {
             </div>
             <div className="space-y-4 flex-1">
               <EditableField
-                label="Téléphone"
+                label={t("Profil.tel")}
                 value={phone}
                 onChange={(val) => {
                   setPhone(val);
@@ -147,7 +152,7 @@ export default function ProfilPage() {
                 }}
               />
               <AutocompleteAddress
-                label="Adresse"
+                label={t("Profil.address")}
                 value={address}
                 onChange={(val) => {
                   setAddress(val);

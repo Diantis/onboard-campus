@@ -11,7 +11,6 @@ export async function GET() {
     const student = await prisma.student.findUnique({ where: { email } });
 
     if (!student) {
-      console.log("Aucun étudiant trouvé pour l'email :", email);
       return NextResponse.json(
         { error: "Aucun profil trouvé" },
         { status: 404 },
