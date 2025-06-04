@@ -1,45 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EventCalendar, type CalendarEvent } from "@/components/event-calendar";
 
-import { setHours, setMinutes, subDays } from "date-fns";
-
-const sampleEvents: CalendarEvent[] = [
-  {
-    id: "1",
-    title: "Annual Planning",
-    description: "Strategic planning for next year",
-    start: subDays(new Date(), 3),
-    end: subDays(new Date(), 2),
-    allDay: true,
-    color: "sky",
-    location: "Main Hall",
-  },
-  {
-    id: "2",
-    title: "Team Meeting",
-    description: "Weekly sync",
-    start: setMinutes(setHours(new Date(), 10), 0),
-    end: setMinutes(setHours(new Date(), 11), 30),
-    color: "amber",
-    location: "Room A",
-  },
-];
-
 export default function CalendarAdmin() {
-  const [events, setEvents] = useState<CalendarEvent[]>(sampleEvents);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+
+  useEffect(() => {
+    fetch("/api/calendar")
+      .then((res) => {
+        if (!res.ok)
+          throw new Error("Erreur lors du chargement des événements");
+        return res.json();
+      })
+      .then((data: CalendarEvent[]) => {
+        const formatted = data.map((e) => ({
+          ...e,
+          start: new Date(e.start),
+          end: new Date(e.end),
+        }));
+        setEvents(formatted);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const handleEventAdd = (event: CalendarEvent) => {
-    setEvents([...events, event]);
+    setEvents((prev) => [
+      ...prev,
+      {
+        ...event,
+        start: new Date(event.start),
+        end: new Date(event.end),
+      },
+    ]);
   };
 
   const handleEventUpdate = (updated: CalendarEvent) => {
-    setEvents(events.map((e) => (e.id === updated.id ? updated : e)));
+    setEvents((prev) => prev.map((e) => (e.id === updated.id ? updated : e)));
   };
 
   const handleEventDelete = (id: string) => {
-    setEvents(events.filter((e) => e.id !== id));
+    setEvents((prev) => prev.filter((e) => e.id !== id));
   };
 
   return (

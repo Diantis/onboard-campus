@@ -178,50 +178,108 @@ export function EventCalendar({
 
   const handleEventSave = (event: CalendarEvent) => {
     if (event.id) {
-      onEventUpdate?.(event);
-      // Show toast notification when an event is updated
-      toast(`Event "${event.title}" updated`, {
-        description: format(new Date(event.start), "MMM d, yyyy"),
-        position: "bottom-left",
-      });
+      fetch("/api/calendar", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Erreur lors de la mise à jour");
+          return res.json();
+        })
+        .then((updatedEvent) => {
+          onEventUpdate?.(updatedEvent);
+          toast(`Événement "${updatedEvent.title}" modifié`, {
+            description: format(new Date(updatedEvent.start), "PPP"),
+            position: "bottom-left",
+          });
+          setIsEventDialogOpen(false);
+          setSelectedEvent(null);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast("Erreur API PUT", { description: err.message });
+        });
     } else {
-      onEventAdd?.({
-        ...event,
-        id: Math.random().toString(36).substring(2, 11),
-      });
-      // Show toast notification when an event is added
-      toast(`Event "${event.title}" added`, {
-        description: format(new Date(event.start), "MMM d, yyyy"),
-        position: "bottom-left",
-      });
+      fetch("/api/calendar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Erreur lors de la création");
+          return res.json();
+        })
+        .then((createdEvent) => {
+          console.log("✔️ Event created from server:", createdEvent);
+          onEventAdd?.({
+            ...createdEvent,
+            start: new Date(createdEvent.start),
+            end: new Date(createdEvent.end),
+          });
+
+          toast(`Événement "${createdEvent.title}" ajouté`, {
+            description: format(new Date(createdEvent.start), "PPP"),
+            position: "bottom-left",
+          });
+
+          setIsEventDialogOpen(false);
+          setSelectedEvent(null);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast("Erreur API POST", { description: err.message });
+        });
     }
-    setIsEventDialogOpen(false);
-    setSelectedEvent(null);
   };
 
   const handleEventDelete = (eventId: string) => {
-    const deletedEvent = events.find((e) => e.id === eventId);
-    onEventDelete?.(eventId);
-    setIsEventDialogOpen(false);
-    setSelectedEvent(null);
-
-    // Show toast notification when an event is deleted
-    if (deletedEvent) {
-      toast(`Event "${deletedEvent.title}" deleted`, {
-        description: format(new Date(deletedEvent.start), "MMM d, yyyy"),
-        position: "bottom-left",
+    fetch(`/api/calendar?id=${eventId}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erreur lors de la suppression");
+        return res.json();
+      })
+      .then(() => {
+        onEventDelete?.(eventId);
+        setIsEventDialogOpen(false);
+        setSelectedEvent(null);
+        toast("Événement supprimé !");
+      })
+      .catch((err) => {
+        console.error(err);
+        toast("Échec de la suppression");
       });
-    }
   };
 
   const handleEventUpdate = (updatedEvent: CalendarEvent) => {
-    onEventUpdate?.(updatedEvent);
-
-    // Show toast notification when an event is updated via drag and drop
-    toast(`Event "${updatedEvent.title}" moved`, {
-      description: format(new Date(updatedEvent.start), "MMM d, yyyy"),
-      position: "bottom-left",
-    });
+    fetch("/api/calendar", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedEvent),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erreur lors de la mise à jour");
+        return res.json();
+      })
+      .then((savedEvent) => {
+        onEventUpdate?.(savedEvent);
+        toast(`Événement "${savedEvent.title}" déplacé`, {
+          description: format(new Date(savedEvent.start), "PPP"),
+          position: "bottom-left",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        toast("Erreur API PUT (drag)", { description: err.message });
+      });
   };
 
   const locale = useDateFnsLocale();
