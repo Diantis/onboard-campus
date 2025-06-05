@@ -7,6 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import { ModeToggle } from "@/components/ModeToggle";
+import SwitchLanguage from "@/components/SwitchLanguage";
 
 export default function LoginSignupCard() {
   const id = useId();
@@ -189,6 +191,10 @@ export default function LoginSignupCard() {
         >
           {isSignUp ? "Sign in" : "Sign up"}
         </button>
+      </div>
+      <div className="flex justify-around">
+        <ModeToggle />
+        <SwitchLanguage />
       </div>
     </div>
   );
