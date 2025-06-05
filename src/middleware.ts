@@ -4,8 +4,6 @@ import { verifyToken } from "@/lib/auth";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
-  console.log("🧠 middleware token:", token);
-
   if (!token) return NextResponse.redirect(new URL("/login", req.url));
 
   try {
@@ -18,5 +16,14 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/profil", "/agenda"],
+  matcher: [
+    "/",
+    "/profil",
+    "/agenda",
+    "/documents",
+    "/map",
+    "/notifications",
+    "/services",
+    "/settings",
+  ],
 };
