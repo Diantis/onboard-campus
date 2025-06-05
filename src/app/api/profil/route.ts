@@ -1,14 +1,25 @@
-// src/app/api/profil/route.ts
 import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
+import type { Student } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
+import { verifyToken } from "@/lib/auth";
+import { cookies } from "next/headers";
+import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-// GET: récupère le profil
 export async function GET() {
   try {
-    const email = "truc.muche@example.com";
-    const student = await prisma.student.findUnique({ where: { email } });
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    if (!token) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
+    const decoded = (await verifyToken(token)) as { id: number };
+    const student = await prisma.student.findUnique({
+      where: { id: decoded.id },
+    });
 
     if (!student) {
       return NextResponse.json(
@@ -17,34 +28,49 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json(student);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _unused, ...safeStudent } = student;
+    return NextResponse.json(safeStudent);
   } catch (error) {
-    console.error(
-      "Erreur lors de la récupération du profil :",
-      JSON.stringify(error, null, 2),
-    );
+    console.error("Erreur GET profil :", error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
 
-// PUT: met à jour le profil
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
-    const {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    if (!token) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
+    const decoded = (await verifyToken(token)) as { id: number };
+    const body = await req.json();
+    const { phone, address, email: newEmail, password, avatarUrl } = body;
+
+    const dataToUpdate: Partial<Student> = {
       phone,
       address,
       email: newEmail,
-      password,
       avatarUrl,
-    } = await req.json();
-    const email = "truc.muche@example.com"; // Même email que pour le GET
+    };
+
+    if (password) {
+      dataToUpdate.password = await hash(password, 10);
+    }
+
     const updated = await prisma.student.update({
-      where: { email },
-      data: { phone, address, email: newEmail, password, avatarUrl },
+      where: { id: decoded.id },
+      data: dataToUpdate,
     });
-    return NextResponse.json(updated);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _unused, ...safeUpdated } = updated;
+    return NextResponse.json(safeUpdated);
   } catch (error) {
-    console.error("Erreur lors de la mise à jour du profil :", error);
+    console.error("Erreur PUT profil :", error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
