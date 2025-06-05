@@ -29,6 +29,7 @@ model Event {
 
 model Student {
   id           Int      @id @default(autoincrement())
+  role         Role     @default(STUDENT)
   name         String
   email        String   @unique
   password     String
@@ -39,6 +40,11 @@ model Student {
   course       String?
   avatarUrl    String?
   createdAt    DateTime @default(now())
+}
+
+enum Role {
+  STUDENT
+  ADMIN
 }
 
 model Prof {

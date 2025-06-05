@@ -2,27 +2,25 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import { BottomNav } from "@/components/BottomNav";
-import { Header } from "@/components/Header";
-
+import { LayoutWrapper } from "@/components/LayoutWrapper";
 
 export const metadata: Metadata = {
   title: "Onboarding Campus",
   description: "Application mobile d’accueil des étudiants",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-			<body>
-				<Header userName="Machin" />
-				<Providers>{children}</Providers>
-				<BottomNav/>
-			</body>
+      <body>
+        <Providers>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </Providers>
+      </body>
     </html>
   );
 }
