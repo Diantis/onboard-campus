@@ -9,15 +9,15 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { ModeToggle } from "@/components/ModeToggle";
 import SwitchLanguage from "@/components/SwitchLanguage";
+import { useTranslation } from "react-i18next";
 
 export default function LoginSignupCard() {
   const id = useId();
   const router = useRouter();
-
+  const { t } = useTranslation();
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -78,14 +78,10 @@ export default function LoginSignupCard() {
         </div>
         <div className="text-center">
           <h2 className="text-lg font-semibold">
-            {isSignUp
-              ? "Create your student account"
-              : "Welcome to Onboarding Campus"}
+            {isSignUp ? t("Login.Create") : t("Login.Welcome")}
           </h2>
           <p className="text-sm text-muted-foreground">
-            {isSignUp
-              ? "Enter your details to sign up."
-              : "Enter your credentials to login to your account."}
+            {isSignUp ? t("Login.Details") : t("Login.Credentials")}
           </p>
         </div>
       </div>
@@ -95,7 +91,7 @@ export default function LoginSignupCard() {
           {isSignUp && (
             <>
               <div className="*:not-first:mt-2">
-                <Label htmlFor={`${id}-name`}>Full Name</Label>
+                <Label htmlFor={`${id}-name`}>{t("Login.name")}</Label>
                 <Input
                   id={`${id}-name`}
                   value={name}
@@ -112,7 +108,7 @@ export default function LoginSignupCard() {
                 />
               </div>
               <div className="*:not-first:mt-2">
-                <Label htmlFor={`${id}-year`}>Year</Label>
+                <Label htmlFor={`${id}-year`}>{t("Login.Year")}</Label>
                 <Input
                   id={`${id}-year`}
                   value={year}
@@ -120,7 +116,7 @@ export default function LoginSignupCard() {
                 />
               </div>
               <div className="*:not-first:mt-2">
-                <Label htmlFor={`${id}-course`}>Course</Label>
+                <Label htmlFor={`${id}-course`}>{t("Login.Course")}</Label>
                 <Input
                   id={`${id}-course`}
                   value={course}
@@ -141,7 +137,7 @@ export default function LoginSignupCard() {
             />
           </div>
           <div className="*:not-first:mt-2">
-            <Label htmlFor={`${id}-password`}>Password</Label>
+            <Label htmlFor={`${id}-password`}>{t("Login.Password")}</Label>
             <Input
               id={`${id}-password`}
               type="password"
@@ -160,11 +156,11 @@ export default function LoginSignupCard() {
                 htmlFor={`${id}-remember`}
                 className="text-muted-foreground font-normal"
               >
-                Remember me
+                {t("Login.Remember")}
               </Label>
             </div>
             <a className="text-sm underline hover:no-underline" href="#">
-              Forgot password?
+              {t("Login.Forgot")}
             </a>
           </div>
         )}
@@ -172,24 +168,24 @@ export default function LoginSignupCard() {
         <Button type="submit" className="w-full" disabled={loading}>
           {loading
             ? isSignUp
-              ? "Création..."
-              : "Connexion..."
+              ? t("Login.Creation")
+              : t("Login.Connexion")
             : isSignUp
-              ? "Sign up"
-              : "Sign in"}
+              ? t("Login.Up")
+              : t("Login.In")}
         </Button>
 
         {error && <p className="text-sm text-red-500 text-center">{error}</p>}
       </form>
 
       <div className="text-center text-sm mt-4">
-        {isSignUp ? "Already have an account?" : "New here?"}{" "}
+        {isSignUp ? t("Login.Account") : t("Login.New")}{" "}
         <button
           type="button"
           className="underline text-primary"
           onClick={() => setIsSignUp(!isSignUp)}
         >
-          {isSignUp ? "Sign in" : "Sign up"}
+          {isSignUp ? t("Login.In") : t("Login.Up")}
         </button>
       </div>
       <div className="flex justify-around">

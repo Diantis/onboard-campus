@@ -133,7 +133,7 @@ export default function SettingsAccordion() {
           });
         }}
       >
-        Logout
+        {t("Settings.Logout")}
       </Button>
     </div>
   );
