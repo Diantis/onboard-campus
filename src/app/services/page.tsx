@@ -52,7 +52,7 @@ const serviceItems = [
 
 const Page = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <main className="flex-grow">
         <div className="w-full md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 rounded-lg mx-auto my-8">
           {serviceItems.map((item) => {

@@ -69,13 +69,13 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="bg-white flex flex-col overflow-hidden">
-      <section className="px-4 pt-4 flex flex-col gap-4">
-        <div className="grid gap-4 sm:grid-cols-2 flex-shrink-0">
+    <main className="bg-background flex flex-col overflow-hidden">
+      <section className="px-8 pt-8 flex flex-col gap-5">
+        <div className="grid gap-5 sm:grid-cols-2 flex-shrink-0">
           {features.map(({ title, description, icon: Icon }) => (
             <div
               key={title}
-              className="p-4 rounded-xl border bg-white dark:bg-zinc-900 shadow flex items-start gap-4"
+              className="p-6 rounded-xl border bg-white dark:bg-zinc-900 shadow flex items-start gap-4"
             >
               <div className="p-2 rounded-lg bg-muted text-primary">
                 <Icon className="w-6 h-6" />
