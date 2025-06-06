@@ -49,7 +49,11 @@ export default function LoginSignupCard() {
       if (res.ok) {
         const data = await res.json();
         console.log("✅ Réponse API:", data);
-        router.push("/profil");
+        if (isSignUp) {
+          router.push("/login");
+        } else {
+          router.push("/");
+        }
       } else {
         const err = await res.json();
         console.warn("❌ Erreur API:", err);
