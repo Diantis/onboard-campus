@@ -23,13 +23,15 @@ export function Header({ userName }: { userName: string }) {
         <div className="h-12 w-px bg-muted" />
         <div className="flex flex-col">
           <div className="flex gap-1">
-            <span className="text-md text-foreground">Bienvenue,</span>
+            <span className="text-md text-foreground">
+              {t("Header.Welcome")},
+            </span>
             <span className="text-base font-semibold text-foreground flex gap-1">
               {userName}
             </span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Voici l&apos;application qui te suivra tout au long de l&apos;année
+            {t("Header.description")}
           </p>
         </div>
       </div>
@@ -47,7 +49,7 @@ export function Header({ userName }: { userName: string }) {
             });
           }}
         >
-          {t("Settings.Logout")}
+          {t("Header.Logout")}
         </Button>
       </div>
     </header>

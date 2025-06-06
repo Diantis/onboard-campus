@@ -39,17 +39,15 @@ export default function HomePage() {
   const features = [
     {
       href: "/services",
-      title: "Services du campus",
-      description:
-        "Découvre les services du campus : scolarité, santé, tutorat, restauration, et plus encore.",
+      title: t("Home.services"),
+      description: t("Home.servicesDescription"),
       icon: HeartHandshake,
       borderColor: "hover:border-pink-400",
     },
     {
       href: "/map",
-      title: "Plan interactif",
-      description:
-        "Explore les bâtiments, les salles et les points d’intérêt facilement.",
+      title: t("Home.mapTitle"),
+      description: t("Home.mapDescription"),
       icon: Map,
       borderColor: "hover:border-emerald-400",
     },
@@ -96,11 +94,10 @@ export default function HomePage() {
         <div className="rounded-xl border-2 bg-white dark:bg-zinc-900 p-6 shadow flex flex-col h-[50vh] overflow-hidden">
           <h2 className="mb-2 text-2xl font-bold flex items-center gap-2">
             <Calendar />
-            {t("Home.agenda")}
+            {t("Home.agendaTitle")}
           </h2>
           <p className="text-muted-foreground mb-4">
-            Reste informé sur les ateliers, forums et les horaires de tes cours
-            à venir.
+            {t("Home.agendaDescription")}
           </p>
 
           <div className="overflow-y-auto flex-1 pr-2">

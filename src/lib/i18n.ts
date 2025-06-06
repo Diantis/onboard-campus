@@ -41,8 +41,27 @@ const resources = {
         noEventsTitle: "Pas d'évènement trouvé.",
         noEventsDescription: "Pas d'évènements prévus pendant cette période.",
       },
+      Header: {
+        description:
+          "Découvre l’app qui va te simplifier la vie sur le campus.",
+        Logout: "Se déconnecter",
+        Welcome: "Bienvenue",
+      },
       Home: {
-        agenda: "Agenda des événements",
+        agendaTitle: "Événements à venir",
+        agendaDescription:
+          "Prêt·e pour la semaine ? Consulte ton planning en quelques secondes.",
+        services: "Services du Campus",
+        servicesDescription:
+          "Découvre les services du campus : scolarité, santé, tutorat, restauration, et plus encore.",
+        mapTitle: "Plan interactif",
+        mapDescription:
+          "Explore les bâtiments, les salles et les points d’intérêt facilement.",
+        profilDescription:
+          "Gère ton profil, modifie tes informations, tes préférences et toutes tes démarches utiles.",
+        documentDescription:
+          "Consulte les documents essentiels pour ton arrivée : guides, contacts, infos pratiques.",
+        loading: "Chargement des événements...",
       },
       Login: {
         Create: "Crée ton compte étudiant",
@@ -79,7 +98,6 @@ const resources = {
         notifications: "Notifications",
         securityPrivacy: "Sécurité et confidentialité",
         settings: "Paramètres",
-        Logout: "Se déconnecter",
       },
     },
   },
@@ -123,8 +141,27 @@ const resources = {
         noEventsDescription:
           "There are no events scheduled for this time period.",
       },
+      Header: {
+        description:
+          "Here is the app that will support you throughout the year.",
+        Logout: "Log out",
+        Welcome: "Welcome",
+      },
       Home: {
-        agenda: "My next events",
+        agendaTitle: "Upcoming events",
+        agendaDescription:
+          "Ready for the week? Check your schedule in seconds.",
+        services: "Campus Services",
+        servicesDescription:
+          "Discover campus services: academics, health, tutoring, dining, and more.",
+        mapTitle: "Interactive Map",
+        mapDescription:
+          "Easily explore buildings, rooms, and points of interest.",
+        profilDescription:
+          "Manage your profile, update your info, preferences, and all your important steps.",
+        documentDescription:
+          "Access all the key documents for your arrival: guides, contacts, practical info.",
+        loading: "Loading events...",
       },
       Login: {
         Create: "Create your student account",
@@ -161,7 +198,6 @@ const resources = {
         notifications: "Notifications",
         securityPrivacy: "Security and privacy",
         settings: "Settings",
-        Logout: "Log out",
       },
     },
   },
