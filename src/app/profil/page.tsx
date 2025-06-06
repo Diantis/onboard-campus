@@ -52,7 +52,7 @@ export default function ProfilPage() {
         setPhone("Téléphone inconnu");
         setAddress("Adresse inconnue");
       });
-  }, []);
+  }, [t]);
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -73,10 +73,10 @@ export default function ProfilPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <h1 className="md:mx-50 m-5 text-2xl font-bold mb-4 flex items-center gap-2">
+      <h2 className="md:mx-50 m-5 text-2xl font-bold mb-4 flex items-center gap-2">
         <CircleUserRound className="w-6 h-6" />
         {t("Profil.title")}
-      </h1>
+      </h2>
 
       <main className="md:mx-50 m-5 flex-1 flex flex-col justify-start space-y-8">
         <div className="relative w-full">

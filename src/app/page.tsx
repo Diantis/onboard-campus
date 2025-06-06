@@ -1,24 +1,115 @@
-// Page d'accueil - Next.js (App Router)
-// Fichier : src/app/page.tsx
+"use client";
+
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { CalendarEvent, AgendaView } from "@/components/event-calendar";
+import {
+  GraduationCap,
+  Map,
+  Calendar,
+  HeartHandshake,
+  User,
+} from "lucide-react";
 
 export default function HomePage() {
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("/api/calendar");
+        const data = await res.json();
+        const parsed = data.map((e: CalendarEvent) => ({
+          ...e,
+          start: new Date(e.start),
+          end: new Date(e.end),
+        }));
+        setEvents(parsed);
+      } catch (err) {
+        console.error("Erreur de chargement des événements:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  const handleEventSelect = (event: CalendarEvent) => {
+    console.log("Event clicked:", event);
+  };
+
+  const features = [
+    {
+      title: "Services du campus",
+      description:
+        "Accède rapidement à la restauration, vie associative, et plus encore.",
+      icon: GraduationCap,
+    },
+    {
+      title: "Plan interactif",
+      description:
+        "Explore les bâtiments, les salles et les points d’intérêt facilement.",
+      icon: Map,
+    },
+    {
+      title: "Aides & accompagnement",
+      description:
+        "Santé, social, tutorat : retrouve tout ce qui peut t’aider dès le début.",
+      icon: HeartHandshake,
+    },
+    {
+      title: "Profil étudiant",
+      description:
+        "Gère ton profil, tes préférences et toutes tes démarches utiles.",
+      icon: User,
+    },
+  ];
+
   return (
-    <main className="relative min-h-screen bg-white pb-28 flex flex-col">
-      <section className="px-4 pt-4 space-y-4 flex-grow">
-        <div className="h-28 w-full rounded-xl bg-yellow-400 shadow" />
-        <div className="relative flex items-center justify-center">
-          <button className="absolute left-0 z-10 bg-white p-2 rounded-full shadow">
-            ◀
-          </button>
-          <div className="h-40 w-full max-w-xs rounded-xl bg-rose-400 shadow" />
-          <button className="absolute right-0 z-10 bg-white p-2 rounded-full shadow">
-            ▶
-          </button>
+    <main className="bg-white flex flex-col overflow-hidden">
+      <section className="px-4 pt-4 flex flex-col gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 flex-shrink-0">
+          {features.map(({ title, description, icon: Icon }) => (
+            <div
+              key={title}
+              className="p-4 rounded-xl border bg-white dark:bg-zinc-900 shadow flex items-start gap-4"
+            >
+              <div className="p-2 rounded-lg bg-muted text-primary">
+                <Icon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">{title}</h3>
+                <p className="text-sm text-muted-foreground">{description}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          <div className="min-w-[6rem] h-24 rounded-xl bg-blue-400 shadow" />
-          <div className="min-w-[6rem] h-24 rounded-xl bg-green-400 shadow" />
-          <div className="min-w-[6rem] h-24 rounded-xl bg-rose-400 shadow" />
+        <div className="rounded-xl border bg-white dark:bg-zinc-900 p-6 shadow flex flex-col h-[50vh] overflow-hidden">
+          <h2 className="mb-2 text-2xl font-bold flex items-center gap-2">
+            <Calendar />
+            {t("Home.agenda")}
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            Reste informé sur les ateliers, forums et activités d’accueil à
+            venir.
+          </p>
+
+          <div className="overflow-y-auto flex-1 pr-2">
+            {loading ? (
+              <p className="text-center text-sm text-muted-foreground">
+                Chargement des événements...
+              </p>
+            ) : (
+              <AgendaView
+                currentDate={new Date()}
+                events={events}
+                onEventSelect={handleEventSelect}
+              />
+            )}
+          </div>
         </div>
       </section>
     </main>

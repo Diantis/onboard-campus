@@ -41,6 +41,9 @@ const resources = {
         noEventsTitle: "Pas d'évènement trouvé.",
         noEventsDescription: "Pas d'évènements prévus pendant cette période.",
       },
+      Home: {
+        agenda: "Agenda des événements",
+      },
       Login: {
         Create: "Crée ton compte étudiant",
         Welcome: "Bienvenue sur Onboarding Campus",
@@ -119,6 +122,9 @@ const resources = {
         noEventsTitle: "No events found",
         noEventsDescription:
           "There are no events scheduled for this time period.",
+      },
+      Home: {
+        agenda: "My next events",
       },
       Login: {
         Create: "Create your student account",
