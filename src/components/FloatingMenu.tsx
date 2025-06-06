@@ -9,14 +9,12 @@ interface FloatingMenuProps {
 }
 
 const menuItems = [
-  { href: "/documents",     Icon: FileText,      label: "Mes documents" },
-  { href: "/chat",          Icon: MessageCircle, label: "Chat"          },
-  { href: "/notifications", Icon: Bell,          label: "Notifications" },
-  { href: "/settings",      Icon: Settings,      label: "Paramètres"    },
+  { href: "/documents", Icon: FileText, label: "Mes documents" },
+  { href: "/chat", Icon: MessageCircle, label: "Chat" },
+  { href: "/notifications", Icon: Bell, label: "Notifications" },
+  { href: "/settings", Icon: Settings, label: "Paramètres" },
 ] as const;
 
-// angles originaux [150, 110, 70, 30] + 180° => [330, 290, 250, 210]
-// On les réordonne pour que l'extrémité gauche soit 210° et l'extrémité droite 330°
 const angles = [210, 250, 290, 330];
 const RADIUS = 100;
 
@@ -33,11 +31,11 @@ export function FloatingMenu({ className = "" }: FloatingMenuProps) {
               key={href}
               href={href}
               aria-label={label}
-              className="
+              className={`
                 absolute w-14 h-14 flex items-center justify-center
-                bg-blue-500 rounded-full text-white shadow-lg
-                hover:scale-105 transition-transform
-              "
+                bg-muted rounded-full text-foreground shadow-md border border-border
+                hover:scale-105 hover:bg-accent transition-all duration-200
+              `}
               style={{
                 top: "50%",
                 left: "50%",
@@ -58,7 +56,7 @@ export function FloatingMenu({ className = "" }: FloatingMenuProps) {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
         className={`
-          w-16 h-16 bg-violet-600 text-white rounded-full
+          w-16 h-16 bg-primary text-white rounded-full
           flex items-center justify-center shadow-lg
           transform transition-transform duration-300
           ${open ? "rotate-45" : "rotate-0"}
