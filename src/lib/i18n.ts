@@ -57,6 +57,7 @@ const resources = {
         New: "Nouveau ici ?",
         Creation: "Création...",
         Connexion: "Connexion...",
+        name: "Nom",
       },
       Profil: {
         address: "Adresse",
@@ -135,6 +136,7 @@ const resources = {
         New: "New here ?",
         Creation: "Registering...",
         Connexion: "Authenticating...",
+        name: "Name",
       },
       Profil: {
         address: "Address",
