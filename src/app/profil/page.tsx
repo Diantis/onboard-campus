@@ -74,7 +74,7 @@ export default function ProfilPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <h2 className="md:mx-50 m-5 text-2xl font-bold mb-4 flex items-center gap-2">
-        <CircleUserRound className="w-6 h-6" />
+        <CircleUserRound className="w-8 h-8" />
         {t("Profil.title")}
       </h2>
 

@@ -5,6 +5,7 @@ import {
   Calendar,
   Map,
   User,
+  Handshake,
   FileText,
   MessageCircle,
   Bell,
@@ -13,7 +14,12 @@ import {
 import Link from "next/link";
 
 const navItems = [
-  { href: "/", Icon: Home, label: "Accueil", hoverColor: "hover:text-sky-400" },
+  {
+    href: "/",
+    Icon: Home,
+    label: "Accueil",
+    hoverColor: "hover:text-indigo-400",
+  },
   {
     href: "/profil",
     Icon: User,
@@ -24,7 +30,7 @@ const navItems = [
     href: "/agenda",
     Icon: Calendar,
     label: "Agenda",
-    hoverColor: "hover:text-rose-400",
+    hoverColor: "hover:text-violet-400",
   },
   {
     href: "/map",
@@ -33,10 +39,16 @@ const navItems = [
     hoverColor: "hover:text-emerald-400",
   },
   {
+    href: "/services",
+    Icon: Handshake,
+    label: "Services",
+    hoverColor: "hover:text-pink-400",
+  },
+  {
     href: "/documents",
     Icon: FileText,
     label: "Documents",
-    hoverColor: "hover:text-indigo-400",
+    hoverColor: "hover:text-sky-400",
   },
   {
     href: "/chat",
@@ -48,7 +60,7 @@ const navItems = [
     href: "/notifications",
     Icon: Bell,
     label: "Notifications",
-    hoverColor: "hover:text-red-400",
+    hoverColor: "hover:text-red-500",
   },
   {
     href: "/settings",

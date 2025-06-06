@@ -16,7 +16,6 @@ import Link from "next/link";
 import SwitchLanguage from "./SwitchLanguage";
 import { ModeToggle } from "./ModeToggle";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
 
 export default function SettingsAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -125,16 +124,6 @@ export default function SettingsAccordion() {
           )}
         </div>
       ))}
-      <Button
-        className="w-full"
-        onClick={() => {
-          fetch("/api/logout", { method: "POST" }).then(() => {
-            window.location.href = "/login";
-          });
-        }}
-      >
-        {t("Settings.Logout")}
-      </Button>
     </div>
   );
 }
