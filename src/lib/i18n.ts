@@ -158,7 +158,7 @@ const resources = {
         mapTitle: "Interactive Map",
         mapDescription:
           "Easily explore buildings, rooms, and points of interest.",
-        profilTitle: "Profil étudiant",
+        profilTitle: "Student Profile",
         profilDescription:
           "Manage your profile, update your info, preferences, and all your important steps.",
         documentDescription:
