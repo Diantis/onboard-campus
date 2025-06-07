@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 export function Header({ userName }: { userName: string }) {
   const { t } = useTranslation();
@@ -17,11 +18,14 @@ export function Header({ userName }: { userName: string }) {
           width={72}
           height={72}
           alt="Logo Campus"
-          className="rounded-full object-cover border-2 border-muted shadow"
+          className="rounded-full object-cover border-2 border-muted shadow mr-2"
           priority
         />
         <div className="h-12 w-px bg-muted" />
-        <div className="flex flex-col">
+        <Link
+          href={"/profil"}
+          className="flex flex-col p-4 rounded-xl hover:border-2 hover:border-amber-400"
+        >
           <div className="flex gap-1">
             <span className="text-md text-foreground">
               {t("Header.Welcome")},
@@ -30,10 +34,11 @@ export function Header({ userName }: { userName: string }) {
               {userName}
             </span>
           </div>
+
           <p className="text-xs text-muted-foreground">
             {t("Header.description")}
           </p>
-        </div>
+        </Link>
       </div>
       <div className="flex items-center gap-4">
         <button

@@ -8,6 +8,7 @@ import { EditableField } from "@/components/EditableField";
 import { PasswordField } from "@/components/PasswordField";
 import { AutocompleteAddress } from "@/components/AutocompleteAddress";
 import Image from "next/image";
+import { AiOutlineUser } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 
 export default function ProfilPage() {
@@ -82,15 +83,20 @@ export default function ProfilPage() {
         <div className="relative w-full">
           <div className="h-40 bg-amber-400 rounded-lg shadow-md" />
           <div className="absolute left-6 -bottom-16 w-32 h-32 group">
-            <Image
-              src={avatar}
-              width={128}
-              height={128}
-              alt="Avatar"
-              className="rounded-full object-cover border-4 border-background shadow-lg w-full h-full"
-              priority
-            />
-
+            {avatar ? (
+              <Image
+                src={avatar}
+                width={128}
+                height={128}
+                alt="Avatar"
+                className="rounded-full object-cover border-4 border-background shadow-lg w-full h-full"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-300 rounded-full">
+                <AiOutlineUser size={64} className="text-white" />
+              </div>
+            )}
             <button
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 rounded-full text-white"
               onClick={() => fileInputRef.current?.click()}

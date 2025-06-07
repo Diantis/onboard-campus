@@ -52,11 +52,11 @@ export default function HomePage() {
       borderColor: "hover:border-emerald-400",
     },
     {
-      href: "/profil",
-      title: t("Home.profilTitle"),
-      description: t("profilDescription"),
+      href: "/chat",
+      title: "FAQ",
+      description: t("Home.chatDescription"),
       icon: User,
-      borderColor: "hover:border-amber-400",
+      borderColor: "hover:border-orange-400",
     },
     {
       href: "/documents",
