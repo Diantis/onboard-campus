@@ -53,17 +53,15 @@ export default function HomePage() {
     },
     {
       href: "/profil",
-      title: "Profil étudiant",
-      description:
-        "Gère ton profil, modifie tes informations, tes préférences et toutes tes démarches utiles.",
+      title: t("Home.profilTitle"),
+      description: t("profilDescription"),
       icon: User,
       borderColor: "hover:border-amber-400",
     },
     {
       href: "/documents",
       title: "Documents",
-      description:
-        "Consulte les documents essentiels pour ton arrivée : guides, contacts, infos pratiques.",
+      description: t("Home.documentDescription"),
       icon: File,
       borderColor: "hover:border-sky-400",
     },
@@ -103,7 +101,7 @@ export default function HomePage() {
           <div className="overflow-y-auto flex-1 pr-2">
             {loading ? (
               <p className="text-center text-sm text-muted-foreground">
-                Chargement des événements...
+                {t("Home.loading")}
               </p>
             ) : (
               <AgendaView
