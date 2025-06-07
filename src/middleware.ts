@@ -4,10 +4,19 @@ import { verifyToken } from "@/lib/auth";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
-  if (!token) return NextResponse.redirect(new URL("/login", req.url));
+  const pathname = req.nextUrl.pathname;
+
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
   try {
-    await verifyToken(token);
+    const decoded = await verifyToken(token);
+
+    if (pathname === "/agenda" && decoded.role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/agenda/public", req.url));
+    }
+
     return NextResponse.next();
   } catch (err) {
     console.warn("❌ JWT invalide:", err);

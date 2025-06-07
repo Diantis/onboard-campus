@@ -66,6 +66,7 @@ export function EventCalendar({
   onEventDelete,
   className,
   initialView = "month",
+  editable = true,
 }: EventCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState<CalendarView>(initialView);
@@ -142,12 +143,14 @@ export function EventCalendar({
   };
 
   const handleEventSelect = (event: CalendarEvent) => {
+    if (!editable) return;
     console.log("Event selected:", event); // Debug log
     setSelectedEvent(event);
     setIsEventDialogOpen(true);
   };
 
   const handleEventCreate = (startTime: Date) => {
+    if (!editable) return;
     console.log("Creating new event at:", startTime); // Debug log
 
     // Snap to 15-minute intervals
@@ -177,6 +180,7 @@ export function EventCalendar({
   };
 
   const handleEventSave = (event: CalendarEvent) => {
+    if (!editable) return;
     if (event.id) {
       fetch("/api/calendar", {
         method: "PUT",
@@ -238,6 +242,7 @@ export function EventCalendar({
   };
 
   const handleEventDelete = (eventId: string) => {
+    if (!editable) return;
     fetch(`/api/calendar?id=${eventId}`, {
       method: "DELETE",
     })
@@ -258,6 +263,7 @@ export function EventCalendar({
   };
 
   const handleEventUpdate = (updatedEvent: CalendarEvent) => {
+    if (!editable) return;
     fetch("/api/calendar", {
       method: "PUT",
       headers: {
@@ -422,20 +428,22 @@ export function EventCalendar({
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button
-              className="aspect-square max-[479px]:p-0!"
-              onClick={() => {
-                setSelectedEvent(null); // Ensure we're creating a new event
-                setIsEventDialogOpen(true);
-              }}
-            >
-              <PlusIcon
-                className="opacity-60 sm:-ms-1"
-                size={16}
-                aria-hidden="true"
-              />
-              <span className="max-sm:sr-only">{t("Agenda.NewEvent")}</span>
-            </Button>
+            {editable && (
+              <Button
+                className="aspect-square max-[479px]:p-0!"
+                onClick={() => {
+                  setSelectedEvent(null); // Ensure we're creating a new event
+                  setIsEventDialogOpen(true);
+                }}
+              >
+                <PlusIcon
+                  className="opacity-60 sm:-ms-1"
+                  size={16}
+                  aria-hidden="true"
+                />
+                <span className="max-sm:sr-only">{t("Agenda.NewEvent")}</span>
+              </Button>
+            )}
           </div>
         </div>
 
@@ -472,17 +480,18 @@ export function EventCalendar({
             />
           )}
         </div>
-
-        <EventDialog
-          event={selectedEvent}
-          isOpen={isEventDialogOpen}
-          onClose={() => {
-            setIsEventDialogOpen(false);
-            setSelectedEvent(null);
-          }}
-          onSave={handleEventSave}
-          onDelete={handleEventDelete}
-        />
+        {editable && (
+          <EventDialog
+            event={selectedEvent}
+            isOpen={isEventDialogOpen}
+            onClose={() => {
+              setIsEventDialogOpen(false);
+              setSelectedEvent(null);
+            }}
+            onSave={handleEventSave}
+            onDelete={handleEventDelete}
+          />
+        )}
       </CalendarDndProvider>
     </div>
   );

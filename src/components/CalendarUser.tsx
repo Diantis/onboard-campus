@@ -1,25 +1,34 @@
 "use client";
 
 import { EventCalendar, type CalendarEvent } from "@/components/event-calendar";
-
-import { addDays } from "date-fns";
-
-const userEvents: CalendarEvent[] = [
-  {
-    id: "1",
-    title: "Product Launch",
-    description: "Big day!",
-    start: addDays(new Date(), 1),
-    end: addDays(new Date(), 2),
-    allDay: true,
-    color: "emerald",
-  },
-];
+import { useState, useEffect } from "react";
 
 export default function CalendarUser() {
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+
+  useEffect(() => {
+    fetch("/api/calendar")
+      .then((res) => {
+        if (!res.ok)
+          throw new Error("Erreur lors du chargement des événements");
+        return res.json();
+      })
+      .then((data: CalendarEvent[]) => {
+        const formatted = data.map((e) => ({
+          ...e,
+          start: new Date(e.start),
+          end: new Date(e.end),
+        }));
+        setEvents(formatted);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return (
     <EventCalendar
-      events={userEvents}
+      events={events}
       onEventAdd={() => {}}
       onEventUpdate={() => {}}
       onEventDelete={() => {}}
