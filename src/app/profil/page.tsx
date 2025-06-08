@@ -74,12 +74,11 @@ export default function ProfilPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <h2 className="md:mx-50 m-5 text-2xl font-bold mb-4 flex items-center gap-2">
+      <h2 className="ml-5 mt-5 sm:ml-10 sm:mt-10 text-2xl font-bold flex items-center gap-2">
         <CircleUserRound className="w-8 h-8" />
         {t("Profil.title")}
       </h2>
-
-      <main className="md:mx-50 m-5 flex-1 flex flex-col justify-start space-y-8">
+      <main className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-8">
         <div className="relative w-full">
           <div className="h-40 bg-amber-400 rounded-lg shadow-md" />
           <div className="absolute left-6 -bottom-16 w-32 h-32 group">
@@ -116,7 +115,7 @@ export default function ProfilPage() {
         </div>
         <div className="mt-4 bg-card shadow-md rounded-lg p-6 space-y-4">
           <h2 className="text-2xl font-bold">{name}</h2>
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-6">
             <div className="space-y-4 flex-1">
               <p className="text-muted-foreground">{course}</p>
               <p className="text-muted-foreground">{year}</p>
