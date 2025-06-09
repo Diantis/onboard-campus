@@ -1,6 +1,3 @@
-import { BottomNav } from "@/components/BottomNav";
-import { FloatingMenu } from "@/components/FloatingMenu";
-import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IoMdRestaurant } from "react-icons/io";
@@ -8,7 +5,6 @@ import { IoMdRestaurant } from "react-icons/io";
 const page = () => {
   return (
     <div>
-      <Header userName="Machin" />
       <div className="w-full my-8 px-4 md:px-7 lg:px-12 pb-24">
         <Button className="mb-8">
           <Link href={"/services"}>Retour</Link>
@@ -110,8 +106,6 @@ const page = () => {
           </section>
         </article>
       </div>
-      <FloatingMenu />
-      <BottomNav />
     </div>
   );
 };

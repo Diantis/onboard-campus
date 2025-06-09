@@ -1,6 +1,7 @@
 "use client";
 
-import { Search, Menu } from "lucide-react";
+import { useState } from "react";
+import { Search, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ import {
 
 export function Header({ userName }: { userName: string }) {
   const { t } = useTranslation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md shadow-sm border-b border-border px-6 py-4 flex items-center justify-between">
@@ -27,15 +29,16 @@ export function Header({ userName }: { userName: string }) {
           priority
         />
         <div className="h-12 w-px bg-muted hidden sm:block" />
+
         <Link
-          href={"/profil"}
+          href="/profil"
           className="hidden sm:flex flex-col p-4 rounded-xl hover:border-2 hover:border-amber-400"
         >
           <div className="flex gap-1">
             <span className="text-md text-foreground">
               {t("Header.Welcome")},
             </span>
-            <span className="text-base font-semibold text-foreground flex gap-1">
+            <span className="text-base font-semibold text-foreground">
               {userName}
             </span>
           </div>
@@ -43,15 +46,6 @@ export function Header({ userName }: { userName: string }) {
             {t("Header.description")}
           </p>
         </Link>
-
-        <div className="sm:hidden px-2">
-          <span className="text-sm text-foreground">
-            {t("Header.Welcome")},
-          </span>{" "}
-          <span className="text-sm font-semibold text-foreground">
-            {userName}
-          </span>
-        </div>
       </div>
 
       {/* Desktop buttons */}
@@ -76,11 +70,21 @@ export function Header({ userName }: { userName: string }) {
 
       {/* Mobile dropdown */}
       <div className="sm:hidden">
-        <DropdownMenu>
+        <DropdownMenu onOpenChange={(open) => setIsMenuOpen(open)}>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" aria-label="Menu">
-              <Menu className="h-5 w-5" />
-            </Button>
+            <button className="flex items-center gap-1 px-2">
+              <span className="text-md text-foreground">
+                {t("Header.Welcome")},
+              </span>
+              <span className="text-md font-semibold text-foreground">
+                {userName}
+              </span>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 mt-[3px] ${
+                  isMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>

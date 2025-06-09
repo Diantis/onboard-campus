@@ -80,9 +80,13 @@ export default function ProfilPage() {
       </h2>
       <main className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-8">
         <div className="relative w-full">
-          <div className="h-40 bg-amber-400 rounded-lg shadow-md" />
+          <div className="h-40 bg-muted rounded-lg shadow-md" />
           <div className="absolute left-6 -bottom-16 w-32 h-32 group">
-            {avatar ? (
+            {avatar === "/avatar.jpg" ? (
+              <div className="w-full h-full object-cover border-4 border-background shadow-lg flex items-center justify-center bg-gray-300 rounded-full">
+                <AiOutlineUser size={64} className="text-white" />
+              </div>
+            ) : (
               <Image
                 src={avatar}
                 width={128}
@@ -91,10 +95,6 @@ export default function ProfilPage() {
                 className="rounded-full object-cover border-4 border-background shadow-lg w-full h-full"
                 priority
               />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-300 rounded-full">
-                <AiOutlineUser size={64} className="text-white" />
-              </div>
             )}
             <button
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 rounded-full text-white"
