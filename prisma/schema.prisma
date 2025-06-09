@@ -51,3 +51,11 @@ model Prof {
   id    Int    @id @default(autoincrement())
   name  String
 }
+
+model FaqQuestion {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String?  // null si pas encore répondu
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
