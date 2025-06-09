@@ -3,7 +3,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { CircleUserRound, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { EditableField } from "@/components/EditableField";
 import { PasswordField } from "@/components/PasswordField";
 import { AutocompleteAddress } from "@/components/AutocompleteAddress";
@@ -75,7 +75,6 @@ export default function ProfilPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <h2 className="ml-5 mt-5 sm:ml-10 sm:mt-10 text-2xl font-bold flex items-center gap-2">
-        <CircleUserRound className="w-8 h-8" />
         {t("Profil.title")}
       </h2>
       <main className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-8">
