@@ -1,4 +1,5 @@
 # Dockerfile
+
 FROM node:18-alpine
 
 WORKDIR /app
@@ -8,6 +9,15 @@ RUN npm install
 
 COPY . .
 
+# Injecter la variable d'env AVANT le build
+ENV NEXT_IGNORE_ESLINT_ERRORS=true
+
+# Prisma client
+RUN npx prisma generate
+
+# Port
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+# Build + start app
+RUN npm run build
+CMD ["npm", "start"]

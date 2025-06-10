@@ -42,28 +42,32 @@ export default function HomePage() {
       title: t("Home.services"),
       description: t("Home.servicesDescription"),
       icon: HeartHandshake,
-      borderColor: "hover:border-pink-400",
+      hoverColor:
+        "hover:border-pink-400 hover:shadow-pink-100 dark:hover:shadow-pink-900/20",
     },
     {
       href: "/map",
       title: t("Home.mapTitle"),
       description: t("Home.mapDescription"),
       icon: Map,
-      borderColor: "hover:border-emerald-400",
+      hoverColor:
+        "hover:border-emerald-400 hover:shadow-emerald-100 dark:hover:shadow-emerald-900/20",
     },
     {
-      href: "/profil",
-      title: t("Home.profilTitle"),
-      description: t("profilDescription"),
+      href: "/chat",
+      title: "FAQ",
+      description: t("Home.chatDescription"),
       icon: User,
-      borderColor: "hover:border-amber-400",
+      hoverColor:
+        "hover:border-amber-400 hover:shadow-amber-100 dark:hover:shadow-amber-900/20",
     },
     {
       href: "/documents",
       title: "Documents",
       description: t("Home.documentDescription"),
       icon: File,
-      borderColor: "hover:border-sky-400",
+      hoverColor:
+        "hover:border-sky-400 hover:shadow-sky-100 dark:hover:shadow-sky-900/20",
     },
   ];
 
@@ -72,11 +76,11 @@ export default function HomePage() {
       <section className="px-8 pt-8 flex flex-col gap-5">
         <div className="grid gap-5 sm:grid-cols-2 flex-shrink-0">
           {features.map(
-            ({ href, title, description, icon: Icon, borderColor }) => (
+            ({ href, title, description, icon: Icon, hoverColor }) => (
               <Link
                 href={href}
                 key={title}
-                className={`p-6 rounded-xl border hover:border-3 ${borderColor} bg-white dark:bg-zinc-900 shadow flex items-start gap-4`}
+                className={`p-6 rounded-xl border-2 border-transparent ${hoverColor} bg-white dark:bg-zinc-900 shadow hover:shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-1 flex items-start gap-4`}
               >
                 <div className="p-2 rounded-lg bg-muted text-primary">
                   <Icon className="w-6 h-6" />
