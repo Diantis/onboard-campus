@@ -29,9 +29,9 @@ export default function FaqClient() {
       }
       setFaqs(await res.json());
       setError(null);
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
-      setError(err.message);
+      setError("Erreur connexion serveur");
       setFaqs([]);
     }
   };
@@ -43,7 +43,7 @@ export default function FaqClient() {
   // Si user === undefined, on est en chargement du hook
   if (user === undefined) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="rounded-xl border-2 bg-white dark:bg-zinc-900 min-h-screen flex items-center justify-center bg-white">
         <p className="text-black">Chargement…</p>
       </div>
     );
@@ -52,8 +52,8 @@ export default function FaqClient() {
   // Si admin, afficher le gestionnaire
   if (user && user.role === "ADMIN") {
     return (
-      <div className="min-h-screen bg-white p-6">
-        <h1 className="text-black text-3xl font-bold mb-4">Gestion FAQ</h1>
+      <div className="rounded-xl border-2 bg-white dark:bg-zinc-900 min-h-screen bg-white p-6">
+        <h2 className="text-black text-3xl font-bold mb-4">Gestion FAQ</h2>
         <FaqAdminManager />
       </div>
     );
@@ -61,13 +61,11 @@ export default function FaqClient() {
 
   // Étudiant ou non connecté : afficher la FAQ publique
   const filtered = faqs.filter((f) =>
-    f.question.toLowerCase().includes(query.toLowerCase())
+    f.question.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
-    <div className="min-h-screen bg-white p-6">
-      <h1 className="text-black text-3xl font-bold mb-6">FAQ</h1>
-
+    <div className="rounded-xl border-2 bg-white dark:bg-zinc-900 min-h-screen bg-white p-6">
       <input
         type="text"
         placeholder="Rechercher une question…"
@@ -77,19 +75,13 @@ export default function FaqClient() {
       />
 
       {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-          {error}
-        </div>
+        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
       )}
 
       <div className="space-y-4 mb-8">
         {filtered.length > 0 ? (
           filtered.map((f) => (
-            <FaqItem
-              key={f.id}
-              question={f.question}
-              answer={f.answer!}
-            />
+            <FaqItem key={f.id} question={f.question} answer={f.answer!} />
           ))
         ) : (
           <p className="text-gray-500">Aucune question trouvée.</p>

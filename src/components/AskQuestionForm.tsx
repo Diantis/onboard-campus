@@ -1,10 +1,13 @@
 // src/components/AskQuestionForm.tsx
 "use client";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 export default function AskQuestionForm() {
   const [q, setQ] = useState("");
-  const [status, setStatus] = useState<"idle"|"sending"|"sent"|"error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,13 +38,13 @@ export default function AskQuestionForm() {
         onChange={(e) => setQ(e.target.value)}
       />
       <div className="mt-2 flex items-center gap-4">
-        <button
+        <Button
           type="submit"
           disabled={status === "sending"}
-          className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+          className="px-4 py-2 bg-primary text-white disabled:opacity-50"
         >
           {status === "sending" ? "Envoi…" : "Envoyer"}
-        </button>
+        </Button>
         {status === "sent" && <span className="text-green-600">Merci !</span>}
         {status === "error" && <span className="text-red-600">Erreur…</span>}
       </div>
