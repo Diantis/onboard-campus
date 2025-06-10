@@ -72,7 +72,7 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="bg-background flex flex-col overflow-hidden">
+    <main className="bg-background flex flex-col overflow-hidden pb-16">
       <section className="px-8 pt-8 flex flex-col gap-5">
         <div className="grid gap-5 sm:grid-cols-2 flex-shrink-0">
           {features.map(
