@@ -1,6 +1,5 @@
 // src/app/faq/page.tsx
 import { Metadata } from "next";
-import FaqClient from "./FaqClient";
 
 export const metadata: Metadata = {
   title: "FAQ – Campus Onboarding",
@@ -11,7 +10,6 @@ export default function FaqPage() {
   return (
     <main className="min-h-screen bg-background p-6">
       <h2 className="text-3xl font-bold mb-8">FAQ</h2>
-      <FaqClient />
     </main>
   );
 }
