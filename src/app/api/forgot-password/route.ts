@@ -5,7 +5,6 @@ import { SignJWT } from "jose";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
 
 async function generateResetToken(email: string) {
@@ -17,6 +16,8 @@ async function generateResetToken(email: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   const { email } = await req.json();
 
   if (!email || typeof email !== "string") {

@@ -43,6 +43,10 @@ const resources = {
       },
       ForgotPassword: {
         error: "Erreur lors de l'envoi. Réessayez.",
+        title: "Mot de passe oublié",
+        description:
+          "Entrez votre e-mail pour recevoir un lien de réinitialisation.",
+        link: "Lien envoyé ! Vérifiez votre boîte mail.",
       },
       Header: {
         description:

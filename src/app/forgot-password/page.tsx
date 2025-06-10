@@ -36,9 +36,9 @@ export default function ForgotPasswordPage() {
 
   return (
     <main className="max-w-md mx-auto p-6 mt-16 bg-white dark:bg-zinc-900 rounded shadow space-y-4">
-      <h1 className="text-xl font-semibold">Mot de passe oublié</h1>
+      <h1 className="text-xl font-semibold">{t("ForgotPassword.title")}</h1>
       <p className="text-sm text-muted-foreground">
-        Entrez votre e-mail pour recevoir un lien de réinitialisation.
+        {t("ForgotPassword.description")}
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -58,9 +58,7 @@ export default function ForgotPasswordPage() {
       </form>
 
       {status === "sent" && (
-        <p className="text-green-600">
-          Lien envoyé ! Vérifiez votre boîte mail.
-        </p>
+        <p className="text-green-600">{t("ForgotPassword.link")}</p>
       )}
       {status === "error" && (
         <p className="text-red-500">{t("ForgotPassword.error")}</p>
