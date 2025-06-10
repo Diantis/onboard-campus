@@ -47,6 +47,9 @@ const resources = {
         description:
           "Entrez votre e-mail pour recevoir un lien de réinitialisation.",
         link: "Lien envoyé ! Vérifiez votre boîte mail.",
+        sending: "Envoi en cours...",
+        sendLink: "Envoyer le lien",
+        cancel: "Annuler",
       },
       Header: {
         description:
@@ -152,7 +155,13 @@ const resources = {
           "There are no events scheduled for this time period.",
       },
       ForgotPassword: {
-        error: "Erreur lors de l'envoi. Réessayez.",
+        error: "Sending mail error. Try again.",
+        title: "Forgotten password",
+        description: "Enter your e-mail to get a reset link.",
+        link: "Link send ! Check your mailbox.",
+        sending: "Sending...",
+        sendLink: "Send reset link",
+        cancel: "Cancel",
       },
       Header: {
         description:

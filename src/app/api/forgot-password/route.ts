@@ -1,4 +1,4 @@
-//src/app/api/forgot-password/route.ts
+// src/app/api/forgot-password/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { SignJWT } from "jose";
@@ -7,11 +7,12 @@ import { prisma } from "@/lib/prisma";
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
 
+// Generate a short-lived JWT token for password reset
 async function generateResetToken(email: string) {
   return await new SignJWT({ email })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("15m")
+    .setExpirationTime("15m") // token expires in 15 minutes
     .sign(secret);
 }
 
@@ -20,16 +21,17 @@ export async function POST(req: NextRequest) {
 
   const { email } = await req.json();
 
+  // Validate email input
   if (!email || typeof email !== "string") {
-    return NextResponse.json({ error: "Email invalide" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid email address" },
+      { status: 400 },
+    );
   }
 
   const user = await prisma.student.findUnique({ where: { email } });
   if (!user) {
-    return NextResponse.json(
-      { error: "Utilisateur introuvable" },
-      { status: 404 },
-    );
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
   const token = await generateResetToken(email);
@@ -46,7 +48,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Erreur email:", err);
-    return NextResponse.json({ error: "Erreur d'envoi" }, { status: 500 });
+    console.error("Email send error:", err);
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 },
+    );
   }
 }

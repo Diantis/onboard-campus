@@ -1,4 +1,5 @@
 // src/app/forgot-password/page.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -14,6 +15,7 @@ export default function ForgotPasswordPage() {
     "idle",
   );
   const { t } = useTranslation();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
@@ -55,10 +57,12 @@ export default function ForgotPasswordPage() {
         </div>
         <div className="flex justify-center gap-8 items-center">
           <Button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "Envoi en cours..." : "Envoyer le lien"}
+            {status === "loading"
+              ? t("ForgotPassword.sending")
+              : t("ForgotPassword.sendLink")}
           </Button>
           <Button variant="secondary" asChild>
-            <Link href="/login">Annuler</Link>
+            <Link href="/login">{t("ForgotPassword.cancel")}</Link>
           </Button>
         </div>
       </form>

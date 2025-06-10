@@ -1,3 +1,5 @@
+// src/app/api/profil/route.ts
+
 import { PrismaClient } from "@prisma/client";
 import type { Student } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,13 +9,14 @@ import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
 
+// Get authenticated user's profile
 export async function GET() {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
     if (!token) {
-      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const decoded = (await verifyToken(token)) as { id: number };
@@ -22,28 +25,27 @@ export async function GET() {
     });
 
     if (!student) {
-      return NextResponse.json(
-        { error: "Aucun profil trouvé" },
-        { status: 404 },
-      );
+      return NextResponse.json({ error: "Profile not found" }, { status: 404 });
     }
 
+    // Remove password from response
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _unused, ...safeStudent } = student;
     return NextResponse.json(safeStudent);
   } catch (error) {
-    console.error("Erreur GET profil :", error);
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    console.error("GET profile error :", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
 
+// Update authenticated user's profile
 export async function PUT(req: NextRequest) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
     if (!token) {
-      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const decoded = (await verifyToken(token)) as { id: number };
@@ -58,7 +60,7 @@ export async function PUT(req: NextRequest) {
     };
 
     if (password) {
-      dataToUpdate.password = await hash(password, 10);
+      dataToUpdate.password = await hash(password, 10); // Hash new password before saving
     }
 
     const updated = await prisma.student.update({
@@ -66,11 +68,12 @@ export async function PUT(req: NextRequest) {
       data: dataToUpdate,
     });
 
+    // Remove password from response
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _unused, ...safeUpdated } = updated;
     return NextResponse.json(safeUpdated);
   } catch (error) {
-    console.error("Erreur PUT profil :", error);
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    console.error("PUT profile error :", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
