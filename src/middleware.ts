@@ -29,10 +29,11 @@ export const config = {
     "/",
     "/profil",
     "/agenda",
-    "/documents",
     "/map",
-    "/notifications",
     "/services",
+    "/documents",
+    "/faq",
+    "/notifications",
     "/settings",
   ],
 };

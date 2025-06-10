@@ -10,7 +10,7 @@ interface FloatingMenuProps {
 
 const menuItems = [
   { href: "/documents", Icon: FileText, label: "Mes documents" },
-  { href: "/chat", Icon: MessageCircle, label: "Chat" },
+  { href: "/faq", Icon: MessageCircle, label: "FAQ" },
   { href: "/notifications", Icon: Bell, label: "Notifications" },
   { href: "/settings", Icon: Settings, label: "Paramètres" },
 ] as const;
