@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  // This line has been corrected to include the ARM64 target for Docker
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -28,18 +29,18 @@ model Event {
 }
 
 model Student {
-  id           Int      @id @default(autoincrement())
-  role         Role     @default(STUDENT)
-  name         String
-  email        String   @unique
-  password     String
-  phone        String?
-  address      String?
-  ine          String?
-  year         String?
-  course       String?
-  avatarUrl    String?
-  createdAt    DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  role      Role     @default(STUDENT)
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  address   String?
+  ine       String?
+  year      String?
+  course    String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
 }
 
 enum Role {

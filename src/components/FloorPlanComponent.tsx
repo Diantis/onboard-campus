@@ -156,7 +156,7 @@ export default function FloorPlanComponent() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full bg-gray-50 border border-gray-300 rounded-lg overflow-hidden shadow-md"
+      className="relative w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-800 dark:to-zinc-900 rounded-lg overflow-hidden"
     >
       <div className="w-full h-full overflow-auto">
         <svg
@@ -164,15 +164,34 @@ export default function FloorPlanComponent() {
           width="100%"
           height="100%"
           viewBox="0 0 350 300"
+          className="bg-white dark:bg-zinc-800"
           style={{
-            background: "white",
             backgroundImage:
-              "repeating-linear-gradient(#f8f8f8 0 1px, transparent 1px 20px), repeating-linear-gradient(90deg, #f8f8f8 0 1px, transparent 1px 20px)",
+              "repeating-linear-gradient(rgba(0,0,0,0.03) 0 1px, transparent 1px 20px), repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 20px)",
           }}
         >
           <defs>
             <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="1" dy="1" stdDeviation="2" floodOpacity="0.2" />
+              <feDropShadow
+                dx="2"
+                dy="2"
+                stdDeviation="3"
+                floodOpacity="0.15"
+              />
+            </filter>
+            <filter
+              id="hover-shadow"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+            >
+              <feDropShadow
+                dx="3"
+                dy="3"
+                stdDeviation="5"
+                floodOpacity="0.25"
+              />
             </filter>
           </defs>
 
@@ -180,6 +199,7 @@ export default function FloorPlanComponent() {
             const hasCourse = !!room.courseName;
             const roomNameYOffset = hasCourse ? -5 : 0;
             const courseNameYOffset = 8;
+            const isSelected = selectedRoom?.id === room.id;
 
             return (
               <g key={room.id}>
@@ -188,13 +208,17 @@ export default function FloorPlanComponent() {
                   y={room.y}
                   width={room.width}
                   height={room.height}
-                  rx="3"
-                  ry="3"
+                  rx="6"
+                  ry="6"
                   fill={room.color}
-                  stroke={selectedRoom?.id === room.id ? "#3B82F6" : "#666"}
-                  strokeWidth={selectedRoom?.id === room.id ? "2" : "1"}
-                  filter="url(#shadow)"
-                  className="cursor-pointer hover:opacity-90 transition-all duration-200 room-rect"
+                  stroke={isSelected ? "#3B82F6" : "rgba(0,0,0,0.1)"}
+                  strokeWidth={isSelected ? "3" : "1.5"}
+                  filter={isSelected ? "url(#hover-shadow)" : "url(#shadow)"}
+                  className="cursor-pointer hover:brightness-105 transition-all duration-300 room-rect"
+                  style={{
+                    transform: isSelected ? "scale(1.02)" : "scale(1)",
+                    transformOrigin: "center",
+                  }}
                   onClick={() => handleRoomClick(room)}
                 />
                 <text
@@ -203,9 +227,10 @@ export default function FloorPlanComponent() {
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fontSize={hasCourse ? "9" : "10"}
-                  fontWeight="bold"
-                  fill="#333"
+                  fontWeight="600"
+                  fill="rgba(0,0,0,0.8)"
                   pointerEvents="none"
+                  className="select-none"
                 >
                   {room.name}
                 </text>
@@ -221,8 +246,9 @@ export default function FloorPlanComponent() {
                     textAnchor="middle"
                     dominantBaseline="middle"
                     fontSize="8"
-                    fill="#555"
+                    fill="rgba(0,0,0,0.6)"
                     pointerEvents="none"
+                    className="select-none"
                   >
                     {room.courseName.length > room.width / 5
                       ? room.courseName.substring(
@@ -241,23 +267,24 @@ export default function FloorPlanComponent() {
       {selectedRoom && (
         <div
           id="room-popup"
-          className="fixed bg-white rounded-lg shadow-lg z-20 border border-gray-200/75 animate-popup-in overflow-hidden"
+          className="absolute bg-white dark:bg-zinc-800 rounded-xl shadow-2xl z-20 border border-gray-200/50 dark:border-zinc-600/50 animate-popup-in overflow-hidden backdrop-blur-sm"
           style={{
             left: "50%",
             top: "50%",
             transform: "translate(-50%, -50%)",
             width: "90%",
-            maxWidth: "360px",
+            maxWidth: "380px",
+            maxHeight: "80%",
           }}
         >
           <div
-            className="h-1.5 w-full"
+            className="h-2 w-full"
             style={{ backgroundColor: selectedRoom.color }}
           ></div>
 
-          <div className="p-5">
+          <div className="p-6 overflow-y-auto max-h-full">
             <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               onClick={(e) => {
                 e.stopPropagation();
                 closePopup();
@@ -280,26 +307,26 @@ export default function FloorPlanComponent() {
               </svg>
             </button>
 
-            <h3 className="font-semibold text-xl text-gray-800 mb-1 pr-8">
+            <h3 className="font-semibold text-xl text-gray-800 dark:text-gray-100 mb-1 pr-10">
               {selectedRoom.name}
             </h3>
 
             {selectedRoom.courseName && (
-              <p className="text-md text-blue-600 font-medium mb-3">
+              <p className="text-md text-blue-600 dark:text-blue-400 font-medium mb-3">
                 {selectedRoom.courseName}
               </p>
             )}
 
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
               {selectedRoom.description}
             </p>
 
             {(selectedRoom.teacher || selectedRoom.schedule) && (
-              <div className="space-y-2 border-t border-gray-200 pt-3 mt-3">
+              <div className="space-y-3 border-t border-gray-200 dark:border-zinc-600 pt-4 mt-4">
                 {selectedRoom.teacher && (
-                  <div className="flex items-center text-sm text-gray-700">
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
                     <svg
-                      className="w-4 h-4 mr-2 text-gray-400"
+                      className="w-4 h-4 mr-3 text-gray-400 dark:text-gray-500"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -311,15 +338,15 @@ export default function FloorPlanComponent() {
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                       />
                     </svg>
-                    <strong className="font-medium mr-1">Professeur:</strong>
+                    <strong className="font-medium mr-2">Professeur:</strong>
                     {selectedRoom.teacher}
                   </div>
                 )}
 
                 {selectedRoom.schedule && (
-                  <div className="flex items-center text-sm text-gray-700">
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
                     <svg
-                      className="w-4 h-4 mr-2 text-gray-400"
+                      className="w-4 h-4 mr-3 text-gray-400 dark:text-gray-500"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -331,17 +358,17 @@ export default function FloorPlanComponent() {
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    <strong className="font-medium mr-1">Horaire:</strong>
+                    <strong className="font-medium mr-2">Horaire:</strong>
                     {selectedRoom.schedule}
                   </div>
                 )}
               </div>
             )}
 
-            <div className="mt-5 text-xs text-gray-500 flex items-center">
+            <div className="mt-5 text-xs text-gray-500 dark:text-gray-400 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-3.5 w-3.5 mr-1.5"
+                className="h-3.5 w-3.5 mr-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -353,7 +380,7 @@ export default function FloorPlanComponent() {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              Clickez sur X pour fermer
+              Cliquez sur X pour fermer
             </div>
           </div>
         </div>
@@ -363,7 +390,7 @@ export default function FloorPlanComponent() {
         @keyframes popup-in {
           from {
             opacity: 0;
-            transform: translate(-50%, -50%) scale(0.95);
+            transform: translate(-50%, -50%) scale(0.9);
           }
           to {
             opacity: 1;
@@ -372,7 +399,7 @@ export default function FloorPlanComponent() {
         }
 
         .animate-popup-in {
-          animation: popup-in 0.2s ease-out forwards;
+          animation: popup-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
       `}</style>
     </div>
