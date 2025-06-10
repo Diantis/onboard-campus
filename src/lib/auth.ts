@@ -2,11 +2,14 @@ import { SignJWT, jwtVerify, JWTPayload } from "jose";
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
 
-export async function generateToken(payload: Record<string, unknown>) {
+export async function generateToken(
+  payload: Record<string, unknown>,
+  expiration: string = "7d",
+) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime(expiration)
     .sign(secret);
 }
 

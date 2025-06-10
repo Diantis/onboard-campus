@@ -41,6 +41,9 @@ const resources = {
         noEventsTitle: "Pas d'évènement trouvé.",
         noEventsDescription: "Pas d'évènements prévus pendant cette période.",
       },
+      ForgotPassword: {
+        error: "Erreur lors de l'envoi. Réessayez.",
+      },
       Header: {
         description:
           "Découvre l’app qui va te simplifier la vie sur le campus.",
@@ -143,6 +146,9 @@ const resources = {
         noEventsTitle: "No events found",
         noEventsDescription:
           "There are no events scheduled for this time period.",
+      },
+      ForgotPassword: {
+        error: "Erreur lors de l'envoi. Réessayez.",
       },
       Header: {
         description:

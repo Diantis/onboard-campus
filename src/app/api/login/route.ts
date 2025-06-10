@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const { email, password, rememberMe } = await req.json();
 
     const user = await prisma.student.findUnique({ where: { email } });
     if (!user)
@@ -21,11 +21,16 @@ export async function POST(req: NextRequest) {
         { status: 401 },
       );
 
-    const token = await generateToken({
-      id: user.id,
-      role: user.role,
-      email: user.email,
-    });
+    const expiration = rememberMe ? "30d" : "1d";
+    const cookieMaxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 24;
+    const token = await generateToken(
+      {
+        id: user.id,
+        role: user.role,
+        email: user.email,
+      },
+      expiration,
+    );
 
     const response = NextResponse.json({ success: true });
     response.headers.set(
@@ -34,7 +39,7 @@ export async function POST(req: NextRequest) {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         path: "/",
-        maxAge: 60 * 60 * 24 * 7,
+        maxAge: cookieMaxAge,
         sameSite: "lax",
       }),
     );

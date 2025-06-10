@@ -1,9 +1,12 @@
+// HomePage
+// src/app/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CalendarEvent, AgendaView } from "@/components/event-calendar";
 import { File, Map, Calendar, HeartHandshake, User } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -88,6 +91,9 @@ export default function HomePage() {
                 <div>
                   <h3 className="text-lg font-semibold">{title}</h3>
                   <p className="text-sm text-muted-foreground">{description}</p>
+                </div>
+                <div className="h-full flex items-center">
+                  <ChevronRight className="block sm:hidden" />
                 </div>
               </Link>
             ),

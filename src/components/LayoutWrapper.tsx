@@ -12,7 +12,7 @@ interface LayoutWrapperProps {
 
 export function LayoutWrapper({ children, userName }: LayoutWrapperProps) {
   const pathname = usePathname();
-  const hideUI = ["/login", "/register"].includes(pathname);
+  const hideUI = ["/login", "/register", "/forgot-password"].includes(pathname);
 
   return (
     <div className="flex min-h-screen">

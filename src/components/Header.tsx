@@ -21,7 +21,7 @@ export function Header({ userName }: { userName: string }) {
     <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md shadow-sm border-b border-border px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-1 sm:gap-4">
         <Image
-          src="/Logo_Campus.png"
+          src="/Logo_Campus.svg"
           width={72}
           height={72}
           alt="Logo Campus"
