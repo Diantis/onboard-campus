@@ -9,8 +9,7 @@ export default function CalendarUser() {
   useEffect(() => {
     fetch("/api/calendar")
       .then((res) => {
-        if (!res.ok)
-          throw new Error("Erreur lors du chargement des événements");
+        if (!res.ok) throw new Error("Error while loading calendar events");
         return res.json();
       })
       .then((data: CalendarEvent[]) => {
@@ -29,10 +28,10 @@ export default function CalendarUser() {
   return (
     <EventCalendar
       events={events}
-      onEventAdd={() => {}}
+      onEventAdd={() => {}} // Event handlers disabled in read-only mode
       onEventUpdate={() => {}}
       onEventDelete={() => {}}
-      editable={false}
+      editable={false} // Calendar is not editable by the student
     />
   );
 }

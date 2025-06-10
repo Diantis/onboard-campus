@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Handle GET request - return all events sorted by start date
 export async function GET() {
   try {
     const events = await prisma.event.findMany({
@@ -10,14 +11,15 @@ export async function GET() {
     });
     return NextResponse.json(events);
   } catch (error) {
-    console.error("Erreur GET:", error);
+    console.error("GET error:", error);
     return NextResponse.json(
-      { error: "Erreur de récupération" },
+      { error: "Failed to retrieve events" },
       { status: 500 },
     );
   }
 }
 
+// Handle POST request - create a new event
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -36,14 +38,15 @@ export async function POST(req: Request) {
 
     return NextResponse.json(event);
   } catch (error) {
-    console.error("Erreur lors de la création d'un événement :", error);
+    console.error("POST error (event creation)", error);
     return NextResponse.json(
-      { error: "Erreur lors de la création" },
+      { error: "Failed to create event" },
       { status: 500 },
     );
   }
 }
 
+// Handle PUT request - update an existing event
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
@@ -56,21 +59,22 @@ export async function PUT(req: Request) {
 
     return NextResponse.json(updated);
   } catch (error) {
-    console.error("Erreur PUT:", error);
+    console.error("PUT error:", error);
     return NextResponse.json(
-      { error: "Erreur lors de la mise à jour" },
+      { error: "Failed to update event" },
       { status: 500 },
     );
   }
 }
 
+// Handle DELETE request - delete an event by ID from query params
 export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
 
     if (!id) {
-      return NextResponse.json({ error: "ID manquant" }, { status: 400 });
+      return NextResponse.json({ error: "Missing event ID" }, { status: 400 });
     }
 
     await prisma.event.delete({
@@ -79,9 +83,9 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erreur DELETE:", error);
+    console.error("DELETE error:", error);
     return NextResponse.json(
-      { error: "Erreur lors de la suppression" },
+      { error: "Failed to delete event" },
       { status: 500 },
     );
   }

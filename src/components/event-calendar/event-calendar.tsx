@@ -190,13 +190,15 @@ export function EventCalendar({
         body: JSON.stringify(event),
       })
         .then((res) => {
-          if (!res.ok) throw new Error("Erreur lors de la mise à jour");
+          if (!res.ok) throw new Error("Failed to update event");
           return res.json();
         })
         .then((updatedEvent) => {
           onEventUpdate?.(updatedEvent);
-          toast(`Événement "${updatedEvent.title}" modifié`, {
-            description: format(new Date(updatedEvent.start), "PPP"),
+          toast(`Event "${updatedEvent.title}" updated`, {
+            description: format(new Date(updatedEvent.start), "PPP", {
+              locale,
+            }),
             position: "bottom-left",
           });
           setIsEventDialogOpen(false);
@@ -215,7 +217,7 @@ export function EventCalendar({
         body: JSON.stringify(event),
       })
         .then((res) => {
-          if (!res.ok) throw new Error("Erreur lors de la création");
+          if (!res.ok) throw new Error("Failed to create event");
           return res.json();
         })
         .then((createdEvent) => {
@@ -226,8 +228,10 @@ export function EventCalendar({
             end: new Date(createdEvent.end),
           });
 
-          toast(`Événement "${createdEvent.title}" ajouté`, {
-            description: format(new Date(createdEvent.start), "PPP"),
+          toast(`Event "${createdEvent.title}" added`, {
+            description: format(new Date(createdEvent.start), "PPP", {
+              locale,
+            }),
             position: "bottom-left",
           });
 
@@ -247,18 +251,18 @@ export function EventCalendar({
       method: "DELETE",
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Erreur lors de la suppression");
+        if (!res.ok) throw new Error("Failed to delete event");
         return res.json();
       })
       .then(() => {
         onEventDelete?.(eventId);
         setIsEventDialogOpen(false);
         setSelectedEvent(null);
-        toast("Événement supprimé !");
+        toast("Event deleted!");
       })
       .catch((err) => {
         console.error(err);
-        toast("Échec de la suppression");
+        toast("Deletion failed");
       });
   };
 
@@ -272,19 +276,19 @@ export function EventCalendar({
       body: JSON.stringify(updatedEvent),
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Erreur lors de la mise à jour");
+        if (!res.ok) throw new Error("Failed to update event");
         return res.json();
       })
       .then((savedEvent) => {
         onEventUpdate?.(savedEvent);
-        toast(`Événement "${savedEvent.title}" déplacé`, {
-          description: format(new Date(savedEvent.start), "PPP"),
+        toast(`Event "${savedEvent.title}" moved`, {
+          description: format(new Date(savedEvent.start), "PPP", { locale }),
           position: "bottom-left",
         });
       })
       .catch((err) => {
         console.error(err);
-        toast("Erreur API PUT (drag)", { description: err.message });
+        toast("API PUT error (drag)", { description: err.message });
       });
   };
 

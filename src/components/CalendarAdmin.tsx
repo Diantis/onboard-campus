@@ -7,10 +7,10 @@ export default function CalendarAdmin() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
 
   useEffect(() => {
+    // Fetch calendar events from the API when the component mounts
     fetch("/api/calendar")
       .then((res) => {
-        if (!res.ok)
-          throw new Error("Erreur lors du chargement des événements");
+        if (!res.ok) throw new Error("Failed to load calendar events");
         return res.json();
       })
       .then((data: CalendarEvent[]) => {
@@ -26,6 +26,7 @@ export default function CalendarAdmin() {
       });
   }, []);
 
+  // Add a new event to the calendar
   const handleEventAdd = (event: CalendarEvent) => {
     setEvents((prev) => [
       ...prev,
@@ -37,10 +38,12 @@ export default function CalendarAdmin() {
     ]);
   };
 
+  // Update an existing event
   const handleEventUpdate = (updated: CalendarEvent) => {
     setEvents((prev) => prev.map((e) => (e.id === updated.id ? updated : e)));
   };
 
+  // Remove an event by ID
   const handleEventDelete = (id: string) => {
     setEvents((prev) => prev.filter((e) => e.id !== id));
   };

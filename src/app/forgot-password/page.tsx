@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -52,9 +53,14 @@ export default function ForgotPasswordPage() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <Button type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Envoi en cours..." : "Envoyer le lien"}
-        </Button>
+        <div className="flex justify-center gap-8 items-center">
+          <Button type="submit" disabled={status === "loading"}>
+            {status === "loading" ? "Envoi en cours..." : "Envoyer le lien"}
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link href="/login">Annuler</Link>
+          </Button>
+        </div>
       </form>
 
       {status === "sent" && (
