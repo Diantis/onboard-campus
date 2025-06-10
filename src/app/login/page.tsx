@@ -51,13 +51,13 @@ export default function LoginCard() {
   return (
     <div className="w-full max-w-md mt-16 mx-auto rounded-xl border p-6 shadow-md space-y-6 bg-white dark:bg-zinc-900">
       <div className="flex flex-col items-center gap-2">
-        <div className="flex size-11 shrink-0 items-center justify-center rounded-full border">
+        <div className="flex shrink-0 items-center justify-center rounded-full border mb-2">
           <Image
             src="/Logo_Campus.png"
-            width={128}
-            height={128}
+            width={64}
+            height={64}
             alt="Logo Campus"
-            className="rounded-full object-cover border-4 border-background shadow-lg w-full h-full"
+            className="rounded-full object-cover border-4 border-background shadow-lg"
             priority
           />
         </div>
