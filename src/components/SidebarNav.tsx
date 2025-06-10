@@ -51,9 +51,9 @@ const navItems = [
     hoverColor: "hover:text-sky-400",
   },
   {
-    href: "/chat",
+    href: "/faq",
     Icon: MessageCircle,
-    label: "Chat",
+    label: "FAQ",
     hoverColor: "hover:text-orange-400",
   },
   {

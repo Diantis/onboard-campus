@@ -47,3 +47,11 @@ enum Role {
   STUDENT
   ADMIN
 }
+
+model FaqQuestion {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String?  // null si pas encore répondu
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
