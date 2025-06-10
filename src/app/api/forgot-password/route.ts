@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 
   try {
     await resend.emails.send({
-      from: "support@tonsite.on.resend.dev",
+      from: "support@onboarding-campus.resend.dev",
       to: email,
       subject: "Réinitialisation de mot de passe",
       html: `<p>Bonjour ${user.name},</p><p><a href="${resetLink}">Cliquez ici pour réinitialiser votre mot de passe</a></p><p>Valable 15 minutes.</p>`,
