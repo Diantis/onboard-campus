@@ -54,9 +54,9 @@ export default function HomePage() {
         "hover:border-emerald-400 hover:shadow-emerald-100 dark:hover:shadow-emerald-900/20",
     },
     {
-      href: "/profil",
-      title: t("Home.profilTitle"),
-      description: t("profilDescription"),
+      href: "/chat",
+      title: "FAQ",
+      description: t("Home.chatDescription"),
       icon: User,
       hoverColor:
         "hover:border-amber-400 hover:shadow-amber-100 dark:hover:shadow-amber-900/20",

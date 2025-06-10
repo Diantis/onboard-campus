@@ -51,6 +51,8 @@ const resources = {
         agendaTitle: "Événements à venir",
         agendaDescription:
           "Prêt·e pour la semaine ? Consulte ton planning en quelques secondes.",
+        chatDescription:
+          "Retrouve rapidement les réponses à toutes tes questions sur la vie étudiante.",
         services: "Services du Campus",
         servicesDescription:
           "Découvre les services du campus : scolarité, santé, tutorat, restauration, et plus encore.",
@@ -152,13 +154,15 @@ const resources = {
         agendaTitle: "Upcoming events",
         agendaDescription:
           "Ready for the week? Check your schedule in seconds.",
+        chatDescription:
+          "Quickly find answers to all your questions about student life, admin steps, campus services, and more.",
         services: "Campus Services",
         servicesDescription:
           "Discover campus services: academics, health, tutoring, dining, and more.",
         mapTitle: "Interactive Map",
         mapDescription:
           "Easily explore buildings, rooms, and points of interest.",
-        profilTitle: "Profil étudiant",
+        profilTitle: "Student Profile",
         profilDescription:
           "Manage your profile, update your info, preferences, and all your important steps.",
         documentDescription:

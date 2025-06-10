@@ -47,8 +47,3 @@ enum Role {
   STUDENT
   ADMIN
 }
-
-model Prof {
-  id   Int    @id @default(autoincrement())
-  name String
-}
