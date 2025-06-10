@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">FAQ</h1>
+    <main className="min-h-screen bg-background p-6">
+      <h2 className="text-3xl font-bold mb-8">FAQ</h2>
       <FaqClient />
     </main>
   );
