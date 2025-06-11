@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { IoIosSchool, IoMdRestaurant } from "react-icons/io";
 import { IoBook } from "react-icons/io5";
 import { FaHandshake } from "react-icons/fa";
 import { FaSchool } from "react-icons/fa6";
 import { BiHealth } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 
 const serviceItems = [
   {
@@ -51,8 +54,12 @@ const serviceItems = [
 ];
 
 const Page = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col">
+      <h1 className="ml-5 mt-5 sm:ml-10 sm:mt-10 text-2xl font-bold flex items-center gap-2">
+        {t("Services.title")}
+      </h1>
       <main className="flex-grow">
         <div className="w-full md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 rounded-lg mx-auto my-8">
           {serviceItems.map((item) => {

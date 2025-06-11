@@ -16,7 +16,9 @@ export default function FaqClient() {
     const res = await fetch("/api/faqs");
     if (res.ok) setFaqs(await res.json());
   };
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   if (user === undefined) {
     return <p className="text-black">Chargement…</p>;
@@ -26,12 +28,14 @@ export default function FaqClient() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white">
-      <h1 className="text-3xl font-bold mb-6">FAQ</h1>
-      {faqs.map((f) => (
-        <FaqItem key={f.id} question={f.question} answer={f.answer} />
-      ))}
-      <AskQuestionForm onSuccess={load} />
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <h1 className="ml-5 sm:ml-10 mt-6 text-2xl font-bold">FAQ</h1>
+      <main className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-8">
+        {faqs.map((f) => (
+          <FaqItem key={f.id} question={f.question} answer={f.answer} />
+        ))}
+        <AskQuestionForm onSuccess={load} />
+      </main>
     </div>
   );
 }

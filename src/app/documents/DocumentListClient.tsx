@@ -3,7 +3,6 @@
 
 import { useState, useEffect } from "react";
 import DocumentSection from "@/components/DocumentSection";
-import DocumentCard from "@/components/DocumentCard";
 import DocumentModal from "@/components/DocumentModal";
 
 type Doc = {

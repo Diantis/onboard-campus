@@ -1,11 +1,6 @@
 // src/app/documents/page.tsx
 
 import { ReactNode } from "react";
-import DocumentSection from "@/components/DocumentSection";
-import DocumentCard from "@/components/DocumentCard";
-import DocumentModal from "@/components/DocumentModal";
-import { Header } from "@/components/Header";
-import { BottomNav } from "@/components/BottomNav";
 
 // On sépare la logique interactive dans un Client Component
 import DocumentListClient from "./DocumentListClient";
@@ -19,15 +14,11 @@ export const metadata = {
 export default function DocumentsPage(): ReactNode {
   return (
     <>
-      <Header userName="Étudiant" />
       <main className="min-h-screen bg-gray-100 p-4 sm:p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">
-          Mes Documents
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">Mes Documents</h1>
         {/* Le vrai affichage, avec hooks, modals, fetch… */}
         <DocumentListClient />
       </main>
-      <BottomNav />
     </>
   );
 }

@@ -2,19 +2,27 @@
 "use client";
 import { useState } from "react";
 
-export default function AskQuestionForm({ onSuccess }: { onSuccess: () => void }) {
+export default function AskQuestionForm({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) {
   const [q, setQ] = useState("");
-  const [status, setStatus] = useState<"idle"|"sending"|"sent"|"error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!q.trim()) return;
     setStatus("sending");
+
     const res = await fetch("/api/faqs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question: q.trim() }),
     });
+
     if (res.ok) {
       setStatus("sent");
       setQ("");
@@ -25,23 +33,30 @@ export default function AskQuestionForm({ onSuccess }: { onSuccess: () => void }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 p-4 bg-white rounded shadow">
+    <form
+      onSubmit={handleSubmit}
+      className="mt-8 p-4 bg-white dark:bg-gray-800 rounded shadow"
+    >
       <textarea
         rows={3}
-        className="w-full p-2 border rounded mb-2"
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 rounded mb-2"
         placeholder="Posez votre question…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
       />
       <button
         type="submit"
-        disabled={status==="sending"}
-        className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+        disabled={status === "sending"}
+        className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 disabled:opacity-50 dark:bg-gray-600 dark:hover:bg-gray-500"
       >
         {status === "sending" ? "Envoi…" : "Envoyer"}
       </button>
-      {status==="sent" && <p className="mt-2 text-green-600">Merci !</p>}
-      {status==="error" && <p className="mt-2 text-red-600">Erreur…</p>}
+      {status === "sent" && (
+        <p className="mt-2 text-green-600 dark:text-green-400">Merci !</p>
+      )}
+      {status === "error" && (
+        <p className="mt-2 text-red-600 dark:text-red-400">Erreur…</p>
+      )}
     </form>
   );
 }
