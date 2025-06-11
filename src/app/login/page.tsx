@@ -37,14 +37,14 @@ export default function LoginCard() {
       });
 
       if (res.ok) {
-        router.push("/profil");
+        router.push("/profil"); // Redirect to profile page on success
       } else {
         const err = await res.json();
-        setError(err?.error || "Erreur inconnue");
+        setError(err?.error || t("Login.UnknownError"));
       }
     } catch (err) {
       console.error(err);
-      setError("Erreur de connexion au serveur");
+      setError(t("Login.ServerError"));
     }
 
     setLoading(false);

@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { Pencil } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface PasswordFieldProps {
   label: string;
-  value: string;
+  value: string; // not used internally, but kept for API consistency
   onChange: (newPassword: string) => void;
 }
 
@@ -14,16 +15,19 @@ export function PasswordField({ label, onChange }: PasswordFieldProps) {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
+  const { t } = useTranslation();
 
+  // Handle password change and validation
   const handleSave = () => {
     if (oldPassword.trim() === "") {
-      setError("Veuillez saisir l'ancien mot de passe.");
+      setError(t("PasswordField.error.oldRequired"));
       return;
     }
     if (newPassword.trim() === "") {
-      setError("Veuillez saisir un nouveau mot de passe.");
+      setError(t("PasswordField.error.newRequired"));
       return;
     }
+
     onChange(newPassword);
     setIsEditing(false);
     setOldPassword("");
@@ -38,14 +42,14 @@ export function PasswordField({ label, onChange }: PasswordFieldProps) {
         <div className="space-y-2">
           <input
             type="password"
-            placeholder="Ancien mot de passe"
+            placeholder={t("PasswordField.placeholder.old")}
             className="border rounded px-2 py-1 text-sm w-full"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
           />
           <input
             type="password"
-            placeholder="Nouveau mot de passe"
+            placeholder={t("PasswordField.placeholder.new")}
             className="border rounded px-2 py-1 text-sm w-full"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
@@ -59,19 +63,19 @@ export function PasswordField({ label, onChange }: PasswordFieldProps) {
               className="text-sm text-primary hover:underline"
               onClick={handleSave}
             >
-              Sauvegarder
+              {t("PasswordField.save")}
             </button>
             <button
               className="text-sm text-muted-foreground hover:underline"
               onClick={() => setIsEditing(false)}
             >
-              Annuler
+              {t("PasswordField.cancel")}
             </button>
           </div>
         </div>
       ) : (
         <span className="flex items-center gap-1">
-          {"●●●●●●"}
+          {"●●●●●●●●●●"}
           <Pencil
             size={16}
             className="cursor-pointer text-muted-foreground"

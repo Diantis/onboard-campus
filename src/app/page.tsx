@@ -57,7 +57,7 @@ export default function HomePage() {
         "hover:border-emerald-400 hover:shadow-emerald-100 dark:hover:shadow-emerald-900/20",
     },
     {
-      href: "/chat",
+      href: "/faq",
       title: "FAQ",
       description: t("Home.chatDescription"),
       icon: User,

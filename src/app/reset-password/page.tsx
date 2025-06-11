@@ -1,4 +1,5 @@
 // src/app/reset-password/page.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -6,17 +7,23 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "react-i18next";
 
 export default function ResetPasswordPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get("token");
+  const { t } = useTranslation();
 
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  /**
+   * Sends new password and token to the API.
+   * If successful, redirects to login page.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token) return;
@@ -38,10 +45,11 @@ export default function ResetPasswordPage() {
 
   return (
     <main className="max-w-md mx-auto p-6 mt-16 bg-slate-50 dark:bg-slate-900 rounded shadow space-y-4">
-      <h1 className="text-xl font-semibold">Nouveau mot de passe</h1>
+      <h1 className="text-xl font-semibold">{t("Reset.title")}</h1>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label htmlFor="password">Mot de passe</Label>
+          <Label htmlFor="password">{t("Reset.label")}</Label>
           <Input
             type="password"
             id="password"
@@ -51,12 +59,11 @@ export default function ResetPasswordPage() {
           />
         </div>
         <Button type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "En cours..." : "Valider"}
+          {status === "loading" ? t("Reset.loading") : t("Reset.submit")}
         </Button>
       </form>
-      {status === "error" && (
-        <p className="text-red-500">Lien expiré ou invalide.</p>
-      )}
+
+      {status === "error" && <p className="text-red-500">{t("Reset.error")}</p>}
     </main>
   );
 }

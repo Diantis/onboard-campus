@@ -16,6 +16,10 @@ interface AddressFeature {
   };
 }
 
+/**
+ * AutocompleteAddress allows the user to edit an address field with autocomplete suggestions
+ * from the French national address API (api-adresse.data.gouv.fr).
+ */
 export function AutocompleteAddress({
   label,
   value,
@@ -25,6 +29,7 @@ export function AutocompleteAddress({
   const [query, setQuery] = useState(value);
   const [suggestions, setSuggestions] = useState<AddressFeature[]>([]);
 
+  // Fetch address suggestions when user types in input
   useEffect(() => {
     if (!isEditing) return;
     if (query.length < 3) {
@@ -43,6 +48,7 @@ export function AutocompleteAddress({
     fetchSuggestions();
   }, [query, isEditing]);
 
+  // Handle user selecting a suggested address
   const handleSelect = (address: string) => {
     onChange(address);
     setQuery(address);

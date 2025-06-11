@@ -1,3 +1,5 @@
+// src/components/SettingsAccordion.tsx
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -27,10 +29,12 @@ export default function SettingsAccordion() {
     setIsMounted(true);
   }, []);
 
+  // Toggle accordion open/close state
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // Dynamically display the correct theme icon and label
   const themeTitle = (
     <div className="flex items-center gap-2">
       {isMounted && theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}

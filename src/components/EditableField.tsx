@@ -9,16 +9,24 @@ interface EditableFieldProps {
   onChange: (newValue: string) => void;
 }
 
+/**
+ * EditableField displays a text value that becomes editable when clicked.
+ * It saves changes on blur or when the Enter key is pressed.
+ */
 export function EditableField({ label, value, onChange }: EditableFieldProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
+  // Save the new value and exit edit mode
   const handleBlur = () => {
     onChange(inputValue);
     setIsEditing(false);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  // Confirm edit on Enter key press
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleBlur();
@@ -41,7 +49,11 @@ export function EditableField({ label, value, onChange }: EditableFieldProps) {
       ) : (
         <span className="flex items-center gap-1">
           {value}
-          <Pencil size={16} className="cursor-pointer text-muted-foreground" onClick={() => setIsEditing(true)} />
+          <Pencil
+            size={16}
+            className="cursor-pointer text-muted-foreground"
+            onClick={() => setIsEditing(true)}
+          />
         </span>
       )}
     </div>

@@ -1,4 +1,5 @@
-// components/RegisterCard.tsx
+// src/app/register/page.tsx
+
 "use client";
 
 import { useState, useId } from "react";

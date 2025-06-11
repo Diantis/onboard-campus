@@ -1,5 +1,3 @@
-// src/app/profil/page.tsx
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -25,36 +23,38 @@ export default function ProfilPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
+  // Load profile data on mount
   useEffect(() => {
     fetch("../api/profil")
       .then((res) => {
-        if (!res.ok) {
-          throw new Error(t("Profil.error"));
-        }
+        if (!res.ok) throw new Error(t("Profil.error"));
         return res.json();
       })
       .then((data) => {
-        setName(data.name ?? "Nom inconnu");
-        setCourse(data.course ?? "Aucun cursus");
-        setYear(data.year ?? "Aucune année");
-        setIne(data.ine ?? "Pas d'INE");
-        setEmail(data.email ?? "Email inconnu");
-        setPhone(data.phone ?? "Téléphone inconnu");
-        setAddress(data.address ?? "Adresse inconnue");
+        // Fallback values are translated
+        setName(data.name ?? t("Profil.fallback.name"));
+        setCourse(data.course ?? t("Profil.fallback.course"));
+        setYear(data.year ?? t("Profil.fallback.year"));
+        setIne(data.ine ?? t("Profil.fallback.ine"));
+        setEmail(data.email ?? t("Profil.fallback.email"));
+        setPhone(data.phone ?? t("Profil.fallback.phone"));
+        setAddress(data.address ?? t("Profil.fallback.address"));
         setAvatar(data.avatarUrl ?? "/avatar.jpg");
       })
       .catch((err) => {
         console.error(err);
-        setName("Nom inconnu");
-        setCourse("Aucun cursus");
-        setYear("Aucune année");
-        setIne("Pas d'INE");
-        setEmail("Email inconnu");
-        setPhone("Téléphone inconnu");
-        setAddress("Adresse inconnue");
+        // Apply fallback values in case of error
+        setName(t("Profil.fallback.name"));
+        setCourse(t("Profil.fallback.course"));
+        setYear(t("Profil.fallback.year"));
+        setIne(t("Profil.fallback.ine"));
+        setEmail(t("Profil.fallback.email"));
+        setPhone(t("Profil.fallback.phone"));
+        setAddress(t("Profil.fallback.address"));
       });
   }, [t]);
 
+  // Handle avatar upload and update
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -77,7 +77,9 @@ export default function ProfilPage() {
       <h1 className="ml-5 sm:ml-10 mt-6 text-2xl font-bold">
         {t("Profil.title")}
       </h1>
+
       <main className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-8">
+        {/* Avatar section with edit button */}
         <div className="relative w-full">
           <div className="h-40 bg-slate-200 dark:bg-slate-700 rounded-lg shadow-md" />
           <div className="absolute left-6 -bottom-16 w-32 h-32 group">
@@ -102,7 +104,6 @@ export default function ProfilPage() {
             >
               <Pencil size={20} />
             </button>
-
             <input
               ref={fileInputRef}
               type="file"
@@ -112,13 +113,18 @@ export default function ProfilPage() {
             />
           </div>
         </div>
+
+        {/* Profile information */}
         <div className="mt-4 bg-card shadow-md rounded-lg p-6 space-y-4">
           <h2 className="text-2xl font-bold">{name}</h2>
+
           <div className="flex flex-col lg:flex-row gap-6">
+            {/* Left column */}
             <div className="space-y-4 flex-1">
               <p className="text-muted-foreground">{course}</p>
               <p className="text-muted-foreground">{year}</p>
               <p className="text-muted-foreground">{ine}</p>
+
               <PasswordField
                 label={t("Profil.password")}
                 value={password}
@@ -132,6 +138,8 @@ export default function ProfilPage() {
                 }}
               />
             </div>
+
+            {/* Right column */}
             <div className="space-y-4 flex-1">
               <EditableField
                 label={t("Profil.tel")}

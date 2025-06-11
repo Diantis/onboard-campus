@@ -41,6 +41,9 @@ const resources = {
         noEventsTitle: "Pas d'évènement trouvé.",
         noEventsDescription: "Pas d'évènements prévus pendant cette période.",
       },
+      AutocompleteAddress: {
+        placeholder: "Entrez votre adresse",
+      },
       ForgotPassword: {
         error: "Erreur lors de l'envoi. Réessayez.",
         title: "Mot de passe oublié",
@@ -93,6 +96,20 @@ const resources = {
         Creation: "Création...",
         Connexion: "Connexion...",
         name: "Nom",
+        UnknownError: "Erreur inconnue",
+        ServerError: "Impossible de se connecter au serveur",
+      },
+      PasswordField: {
+        placeholder: {
+          old: "Ancien mot de passe",
+          new: "Nouveau mot de passe",
+        },
+        error: {
+          oldRequired: "Veuillez saisir l'ancien mot de passe.",
+          newRequired: "Veuillez saisir un nouveau mot de passe.",
+        },
+        save: "Enregistrer",
+        cancel: "Annuler",
       },
       Profil: {
         address: "Adresse",
@@ -101,6 +118,22 @@ const resources = {
         password: "Mot de Passe",
         tel: "Téléphone",
         title: "Mon Profil",
+        fallback: {
+          name: "Nom inconnu",
+          course: "Formation inconnue",
+          year: "Année académique inconnue",
+          ine: "INE inconnu",
+          email: "Email inconnu",
+          phone: "Telephone inconnu",
+          address: "Adresse inconnue",
+        },
+      },
+      Reset: {
+        title: "Nouveau mot de passe",
+        label: "Mot de passe",
+        loading: "Envoi en cours...",
+        submit: "Valider",
+        error: "Lien invalide ou expiré.",
       },
       Services: {
         title: "Mes services",
@@ -159,6 +192,9 @@ const resources = {
         noEventsDescription:
           "There are no events scheduled for this time period.",
       },
+      AutocompleteAddress: {
+        placeholder: "Enter your address",
+      },
       ForgotPassword: {
         error: "Sending mail error. Try again.",
         title: "Forgotten password",
@@ -210,14 +246,44 @@ const resources = {
         Creation: "Registering...",
         Connexion: "Authenticating...",
         name: "Name",
+        UnknownError: "Unknown error occurred.",
+        ServerError: "Unable to connect to the server.",
+      },
+      PasswordField: {
+        placeholder: {
+          old: "Current password",
+          new: "New password",
+        },
+        error: {
+          oldRequired: "Please enter your current password.",
+          newRequired: "Please enter a new password.",
+        },
+        save: "Save",
+        cancel: "Cancel",
       },
       Profil: {
         address: "Address",
         changePic: "Change profile picture",
-        error: "Profile recovery error",
+        error: "Failed to load profile data.",
         password: "Password",
         tel: "Phone",
         title: "My Profile",
+        fallback: {
+          name: "Unknown name",
+          course: "No course",
+          year: "No year",
+          ine: "No INE",
+          email: "Unknown email",
+          phone: "Unknown phone number",
+          address: "Unknown address",
+        },
+      },
+      Reset: {
+        title: "New password",
+        label: "Password",
+        loading: "Submitting...",
+        submit: "Submit",
+        error: "Invalid or expired link.",
       },
       Services: {
         title: "My services",
