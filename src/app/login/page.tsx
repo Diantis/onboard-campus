@@ -52,7 +52,7 @@ export default function LoginCard() {
 
   return (
     <main className="px-5">
-      <section className="w-full max-w-md mt-16 mx-auto rounded-xl border p-6 shadow-md space-y-6 bg-white dark:bg-zinc-900">
+      <section className="w-full max-w-md mt-16 mx-auto rounded-xl border p-6 shadow-md space-y-6 bg-slate-50 dark:bg-slate-900">
         <div className="flex flex-col items-center gap-2">
           <div className="flex shrink-0 items-center justify-center rounded-full border-2 mb-2">
             <Image

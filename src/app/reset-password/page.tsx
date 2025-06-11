@@ -37,7 +37,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <main className="max-w-md mx-auto p-6 mt-16 bg-white dark:bg-zinc-900 rounded shadow space-y-4">
+    <main className="max-w-md mx-auto p-6 mt-16 bg-slate-50 dark:bg-slate-900 rounded shadow space-y-4">
       <h1 className="text-xl font-semibold">Nouveau mot de passe</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

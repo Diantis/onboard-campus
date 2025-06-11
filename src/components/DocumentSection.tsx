@@ -15,7 +15,9 @@ export default function DocumentSection({
 }: DocumentSectionProps) {
   return (
     <section className="mb-8">
-      <h2 className="text-lg font-semibold text-gray-700 mb-3">{title}</h2>
+      <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-3">
+        {title}
+      </h2>
       <div className="space-y-2">
         {docs.map((doc) => (
           <DocumentCard key={doc.id} doc={doc} onView={onView} />

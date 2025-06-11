@@ -73,16 +73,16 @@ export default function ProfilPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-foreground flex flex-col">
       <h1 className="ml-5 sm:ml-10 mt-6 text-2xl font-bold">
         {t("Profil.title")}
       </h1>
       <main className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-8">
         <div className="relative w-full">
-          <div className="h-40 bg-muted rounded-lg shadow-md" />
+          <div className="h-40 bg-slate-200 dark:bg-slate-700 rounded-lg shadow-md" />
           <div className="absolute left-6 -bottom-16 w-32 h-32 group">
             {avatar === "/avatar.jpg" ? (
-              <div className="w-full h-full object-cover border-4 border-background shadow-lg flex items-center justify-center bg-gray-300 rounded-full">
+              <div className="w-full h-full object-cover border-4 border-background shadow-lg flex items-center justify-center bg-slate-300 rounded-full">
                 <AiOutlineUser size={64} className="text-white" />
               </div>
             ) : (

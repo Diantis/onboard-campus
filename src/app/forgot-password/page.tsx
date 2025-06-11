@@ -38,7 +38,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <main className="max-w-md mx-auto p-6 mt-16 bg-white dark:bg-zinc-900 rounded shadow space-y-4">
+    <main className="max-w-md mx-auto p-6 mt-16 bg-slate-50 dark:bg-slate-900 rounded shadow space-y-4">
       <h1 className="text-xl font-semibold">{t("ForgotPassword.title")}</h1>
       <p className="text-sm text-muted-foreground">
         {t("ForgotPassword.description")}

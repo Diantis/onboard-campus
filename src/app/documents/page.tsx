@@ -14,8 +14,10 @@ export const metadata = {
 export default function DocumentsPage(): ReactNode {
   return (
     <>
-      <main className="min-h-screen bg-gray-100 p-4 sm:p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">Mes Documents</h1>
+      <main className="min-h-screen bg-slate-100 dark:bg-slate-900 p-4 sm:p-6">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+          Mes Documents
+        </h1>
         {/* Le vrai affichage, avec hooks, modals, fetch… */}
         <DocumentListClient />
       </main>

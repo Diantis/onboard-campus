@@ -81,7 +81,7 @@ export default function SettingsAccordion() {
           {t("Settings.helpCenter")}
         </div>
       ),
-      content: t("Settings.helpCenter"),
+      content: t("Settings.helpDescription"),
     },
   ];
 

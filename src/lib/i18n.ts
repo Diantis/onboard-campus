@@ -107,6 +107,8 @@ const resources = {
       },
       Settings: {
         helpCenter: "Centre d'aide",
+        helpDescription:
+          "Si vous rencontrez un problème technique ou un comportement inattendu sur notre site, n’hésitez pas à nous le signaler. Notre équipe support est là pour vous aider ! Contactez-nous à l’adresse suivante : support@onboarding-campus.resend.dev. Nous ferons de notre mieux pour vous répondre dans les plus brefs délais.",
         language: "Changer la langue",
         darkMode: "Mode sombre",
         lightMode: "Mode clair",
@@ -222,6 +224,8 @@ const resources = {
       },
       Settings: {
         helpCenter: "Help center",
+        helpDescription:
+          "If you’re experiencing a technical issue or something on the site isn’t working as expected, feel free to let us know. Our support team is here to help! Reach us at: support@onboarding-campus.resend.dev. We’ll do our best to get back to you as soon as possible.",
         language: "Change language",
         darkMode: "Dark mode",
         lightMode: "Light mode",
