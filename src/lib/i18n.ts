@@ -102,6 +102,9 @@ const resources = {
         tel: "Téléphone",
         title: "Mon Profil",
       },
+      Services: {
+        title: "Mes services",
+      },
       Settings: {
         helpCenter: "Centre d'aide",
         language: "Changer la langue",
@@ -213,6 +216,9 @@ const resources = {
         password: "Password",
         tel: "Phone",
         title: "My Profile",
+      },
+      Services: {
+        title: "My services",
       },
       Settings: {
         helpCenter: "Help center",

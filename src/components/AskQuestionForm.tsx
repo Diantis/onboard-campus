@@ -1,9 +1,12 @@
 // src/components/AskQuestionForm.tsx
 "use client";
 import { useState } from "react";
-import { Button } from "./ui/button";
 
-export default function AskQuestionForm() {
+export default function AskQuestionForm({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) {
   const [q, setQ] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
@@ -13,41 +16,47 @@ export default function AskQuestionForm() {
     e.preventDefault();
     if (!q.trim()) return;
     setStatus("sending");
-    try {
-      const res = await fetch("/api/faqs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q.trim() }),
-      });
-      if (!res.ok) throw new Error();
+
+    const res = await fetch("/api/faqs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: q.trim() }),
+    });
+
+    if (res.ok) {
       setStatus("sent");
       setQ("");
-    } catch {
+      onSuccess();
+    } else {
       setStatus("error");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 p-4 bg-white rounded shadow">
-      <h2 className="text-lg font-semibold mb-2">Posez votre question</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="mt-8 p-4 bg-white dark:bg-gray-800 rounded shadow"
+    >
       <textarea
-        className="w-full p-2 border rounded resize-none"
         rows={3}
-        placeholder="Votre question…"
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 rounded mb-2"
+        placeholder="Posez votre question…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
       />
-      <div className="mt-2 flex items-center gap-4">
-        <Button
-          type="submit"
-          disabled={status === "sending"}
-          className="px-4 py-2 bg-primary text-white disabled:opacity-50"
-        >
-          {status === "sending" ? "Envoi…" : "Envoyer"}
-        </Button>
-        {status === "sent" && <span className="text-green-600">Merci !</span>}
-        {status === "error" && <span className="text-red-600">Erreur…</span>}
-      </div>
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 disabled:opacity-50 dark:bg-gray-600 dark:hover:bg-gray-500"
+      >
+        {status === "sending" ? "Envoi…" : "Envoyer"}
+      </button>
+      {status === "sent" && (
+        <p className="mt-2 text-green-600 dark:text-green-400">Merci !</p>
+      )}
+      {status === "error" && (
+        <p className="mt-2 text-red-600 dark:text-red-400">Erreur…</p>
+      )}
     </form>
   );
 }

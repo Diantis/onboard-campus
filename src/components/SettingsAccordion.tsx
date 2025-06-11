@@ -86,16 +86,16 @@ export default function SettingsAccordion() {
   ];
 
   return (
-    <div className="md:mx-50 m-5 space-y-2">
+    <div className="px-4 sm:px-6 md:px-10 py-6 flex-1 flex flex-col justify-start space-y-3">
       {settingsItems.map((item, index) => (
         <div
           key={index}
-          className="border border-border rounded-lg overflow-hidden"
+          className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm overflow-hidden"
         >
           {item.href ? (
             <Link
               href={item.href}
-              className="w-full flex items-center gap-2 p-3 bg-muted hover:bg-muted-foreground/10 transition-all duration-200"
+              className="w-full flex items-center gap-3 p-4 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               {item.icon}
               <span>{item.title}</span>
@@ -104,23 +104,29 @@ export default function SettingsAccordion() {
             <>
               <button
                 onClick={() => toggleAccordion(index)}
-                className="w-full flex justify-between items-center text-left p-3 bg-muted hover:bg-muted-foreground/10 focus:outline-none transition-all duration-200"
+                className="w-full flex justify-between items-center text-left p-4 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               >
                 {item.title}
                 <ChevronDown
-                  className={`transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}
+                  className={`transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
               <div
-                className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${openIndex === index ? "max-h-[500px]" : "max-h-0"}`}
+                className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
+                  openIndex === index ? "max-h-[500px]" : "max-h-0"
+                }`}
               >
-                <div className="p-3 bg-background border-t border-border">
+                <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300">
                   {item.content}
                 </div>
               </div>
             </>
           ) : (
-            <div className="p-3 bg-muted">{item.title}</div>
+            <div className="p-4 text-gray-800 dark:text-gray-100">
+              {item.title}
+            </div>
           )}
         </div>
       ))}
