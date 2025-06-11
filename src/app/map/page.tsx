@@ -22,7 +22,7 @@ export default function MapPage() {
   const [activeTab, setActiveTab] = useState<"map" | "floorplan">("map");
 
   return (
-    <main className="bg-background flex flex-col overflow-hidden">
+    <main className="bg-background flex flex-col overflow-hidden pb-16">
       <section className="px-8 pt-8 flex flex-col gap-5">
         {/* Header Card */}
         <div className="rounded-xl border-2 bg-white dark:bg-zinc-900 p-6 shadow">
