@@ -1,13 +1,8 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// prisma/schema.prisma
 
 generator client {
   provider      = "prisma-client-js"
-  // This line has been corrected to include the ARM64 target for Docker
-  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -29,18 +24,21 @@ model Event {
 }
 
 model Student {
-  id        Int      @id @default(autoincrement())
-  role      Role     @default(STUDENT)
-  name      String
-  email     String   @unique
-  password  String
-  phone     String?
-  address   String?
-  ine       String?
-  year      String?
-  course    String?
-  avatarUrl String?
-  createdAt DateTime @default(now())
+  id         Int               @id @default(autoincrement())
+  role       Role              @default(STUDENT)
+  name       String
+  email      String            @unique
+  password   String
+  phone      String?
+  address    String?
+  ine        String?
+  year       String?
+  course     String?
+  avatarUrl  String?
+  createdAt  DateTime          @default(now())
+
+  // Relation vers les signatures de documents
+  signedDocs SignedDocument[]
 }
 
 enum Role {
@@ -48,10 +46,45 @@ enum Role {
   ADMIN
 }
 
+model Prof {
+  id    Int     @id @default(autoincrement())
+  name  String
+}
+
 model FaqQuestion {
   id        String   @id @default(uuid())
   question  String
-  answer    String?  // null si pas encore répondu
+  answer    String?  // null si en attente de réponse
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Document {
+  id         String           @id @default(uuid())
+  name       String
+  fileUrl    String
+  category   DocumentCategory
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  // Relation vers les signatures
+  signedBy   SignedDocument[]
+}
+
+enum DocumentCategory {
+  TO_SIGN
+  GENERAL
+  RESOURCE
+}
+
+model SignedDocument {
+  id          String    @id @default(uuid())
+  document    Document  @relation(fields: [documentId], references: [id])
+  documentId  String
+  student     Student   @relation(fields: [studentId], references: [id])
+  studentId   Int
+  signature   String    // DataURL ou URL de la signature
+  signedAt    DateTime  @default(now())
+
+  @@unique([documentId, studentId])
 }
