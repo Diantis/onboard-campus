@@ -87,9 +87,6 @@ export function Header({ userName }: { userName: string }) {
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem asChild>
-              <Link href="/profil">{t("Profil.title")}</Link>
-            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
                 fetch("/api/logout", { method: "POST" }).then(() => {

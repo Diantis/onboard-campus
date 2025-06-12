@@ -73,7 +73,7 @@ export default function ProfilPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-foreground flex flex-col">
+    <div className="pb-16 min-h-screen bg-slate-50 dark:bg-slate-900 text-foreground flex flex-col">
       <h1 className="ml-5 sm:ml-10 mt-6 text-2xl font-bold">
         {t("Profil.title")}
       </h1>
