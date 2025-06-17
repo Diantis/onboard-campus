@@ -120,4 +120,8 @@
   body {
     @apply bg-background text-foreground;
   }
+  .rdp-weekdays {
+		display: flex;
+		justify-content: space-around;
+	}
 }

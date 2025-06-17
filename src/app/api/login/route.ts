@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const user = await prisma.student.findUnique({ where: { email } });
     if (!user)
       return NextResponse.json(
-        { error: "Unknown email address" },
+        { error: "Utilisateur inconnu" },
         { status: 401 },
       );
 

@@ -45,7 +45,7 @@ export default function DocumentModal({
     <Dialog.Root open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50" />
-        <Dialog.Content className="mt-24 fixed inset-0 overflow-y-auto p-4 flex justify-center items-start">
+        <Dialog.Content className="mt-24 fixed inset-0 overflow-y-auto p-4 flex justify-center items-start pb-16">
           <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 w-full max-w-2xl rounded-lg shadow-lg">
             {/* Accessible title required by Radix */}
             <Dialog.Title className="p-4 text-xl font-semibold text-gray-800 dark:text-gray-300">

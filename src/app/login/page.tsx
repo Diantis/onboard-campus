@@ -131,7 +131,7 @@ export default function LoginCard() {
           </a>
         </div>
 
-        <div className="flex justify-around">
+        <div className="flex justify-around gap-2">
           <ModeToggle />
           <SwitchLanguage />
         </div>
