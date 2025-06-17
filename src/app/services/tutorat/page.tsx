@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
       <div className="w-full my-8 px-4 md:px-7 lg:px-12 pb-24">
-        <Button className="mb-8">
+        <Button className="sticky top-[20vh] z-50 px-4">
           <Link href={"/services"}>Retour</Link>
         </Button>
 
