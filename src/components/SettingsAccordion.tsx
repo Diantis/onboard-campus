@@ -67,7 +67,7 @@ export default function SettingsAccordion() {
           {t("Settings.notifications")}
         </div>
       ),
-      content: t("Settings.notifications"),
+      content: t("Settings.notificationsDescription"),
     },
     {
       title: (
@@ -76,7 +76,7 @@ export default function SettingsAccordion() {
           {t("Settings.securityPrivacy")}
         </div>
       ),
-      content: t("Settings.securityPrivacy"),
+      content: t("Settings.securityPrivacyDescription"),
     },
     {
       title: (
@@ -85,7 +85,19 @@ export default function SettingsAccordion() {
           {t("Settings.helpCenter")}
         </div>
       ),
-      content: t("Settings.helpDescription"),
+      content: (
+        <div className="space-y-2 text-sm">
+          <p>{t("Settings.helpDescriptionBefore")}</p>
+          <a
+            href="mailto:support@onboarding-campus.resend.dev"
+            className="text-blue-600 underline dark:text-blue-400"
+          >
+            support@onboarding-campus.resend.dev.
+          </a>
+          <span></span>
+          <p className="mt-2">{t("Settings.helpDescriptionAfter")}</p>
+        </div>
+      ),
     },
   ];
 
@@ -104,13 +116,14 @@ export default function SettingsAccordion() {
               {item.icon}
               <span>{item.title}</span>
             </Link>
-          ) : item.content ? (
+          ) : (
             <>
               <button
                 onClick={() => toggleAccordion(index)}
+                aria-expanded={openIndex === index}
                 className="w-full flex justify-between items-center text-left p-4 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               >
-                {item.title}
+                <span className="flex items-center gap-2">{item.title}</span>
                 <ChevronDown
                   className={`transition-transform duration-300 ${
                     openIndex === index ? "rotate-180" : ""
@@ -118,8 +131,10 @@ export default function SettingsAccordion() {
                 />
               </button>
               <div
-                className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
-                  openIndex === index ? "max-h-[500px]" : "max-h-0"
+                className={`overflow-hidden transition-all duration-500 ${
+                  openIndex === index
+                    ? "max-h-[400px] opacity-100"
+                    : "max-h-0 opacity-0"
                 }`}
               >
                 <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300">
@@ -127,10 +142,6 @@ export default function SettingsAccordion() {
                 </div>
               </div>
             </>
-          ) : (
-            <div className="p-4 text-gray-800 dark:text-gray-100">
-              {item.title}
-            </div>
           )}
         </div>
       ))}

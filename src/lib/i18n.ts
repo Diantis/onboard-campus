@@ -140,14 +140,20 @@ const resources = {
       },
       Settings: {
         helpCenter: "Centre d'aide",
-        helpDescription:
-          "Si vous rencontrez un problème technique ou un comportement inattendu sur notre site, n’hésitez pas à nous le signaler. Notre équipe support est là pour vous aider ! Contactez-nous à l’adresse suivante : support@onboarding-campus.resend.dev. Nous ferons de notre mieux pour vous répondre dans les plus brefs délais.",
+        helpDescriptionBefore:
+          "Si vous rencontrez un problème technique ou un comportement inattendu sur notre site, n’hésitez pas à nous le signaler. Notre équipe support est là pour vous aider ! Contactez-nous à l’adresse suivante :",
+        helpDescriptionAfter:
+          "Nous ferons de notre mieux pour vous répondre dans les plus brefs délais.",
         language: "Changer la langue",
         darkMode: "Mode sombre",
         lightMode: "Mode clair",
         myProfile: "Mon profil",
         notifications: "Notifications",
+        notificationsDescription:
+          "Choisissez comment vous souhaitez être informé : email, SMS ou dans l'application.",
         securityPrivacy: "Sécurité et confidentialité",
+        securityPrivacyDescription:
+          "Gérez les préférences de confidentialité de vos données.",
         settings: "Paramètres",
       },
     },
@@ -290,14 +296,19 @@ const resources = {
       },
       Settings: {
         helpCenter: "Help center",
-        helpDescription:
-          "If you’re experiencing a technical issue or something on the site isn’t working as expected, feel free to let us know. Our support team is here to help! Reach us at: support@onboarding-campus.resend.dev. We’ll do our best to get back to you as soon as possible.",
+        helpDescriptionBefore:
+          "If you encounter a technical issue or unexpected behavior on our site, please let us know. Our support team is here to help! Contact us at:",
+        helpDescriptionAfter:
+          "We’ll do our best to get back to you as soon as possible.",
         language: "Change language",
         darkMode: "Dark mode",
         lightMode: "Light mode",
         myProfile: "My profile",
         notifications: "Notifications",
+        notificationsDescription:
+          "Choose how you'd like to be notified: email, SMS, or in-app.",
         securityPrivacy: "Security and privacy",
+        securityPrivacyDescription: "Manage your data privacy preferences.",
         settings: "Settings",
       },
     },
