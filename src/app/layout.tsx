@@ -20,7 +20,7 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
 
-  let studentName = "Étudiant";
+  let studentName = "";
 
   if (token) {
     try {
