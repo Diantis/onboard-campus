@@ -25,6 +25,10 @@ export default function RegisterCard() {
   const [course, setCourse] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const sanitizeInput = (value: string) => {
+    // Avoid $ and ; in the input to prevent SQL injection and XSS attack
+    return value.replace(/[$;]/g, "");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,7 +83,7 @@ export default function RegisterCard() {
           <Input
             id={`${id}-name`}
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setName(sanitizeInput(e.target.value))}
             required
           />
 
@@ -88,7 +92,7 @@ export default function RegisterCard() {
             id={`${id}-email`}
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(sanitizeInput(e.target.value))}
             required
           />
 
@@ -97,7 +101,7 @@ export default function RegisterCard() {
             id={`${id}-password`}
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(sanitizeInput(e.target.value))}
             required
           />
 
@@ -105,21 +109,21 @@ export default function RegisterCard() {
           <Input
             id={`${id}-ine`}
             value={ine}
-            onChange={(e) => setIne(e.target.value)}
+            onChange={(e) => setIne(sanitizeInput(e.target.value))}
           />
 
           <Label htmlFor={`${id}-year`}>{t("Login.Year")}</Label>
           <Input
             id={`${id}-year`}
             value={year}
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => setYear(sanitizeInput(e.target.value))}
           />
 
           <Label htmlFor={`${id}-course`}>{t("Login.Course")}</Label>
           <Input
             id={`${id}-course`}
             value={course}
-            onChange={(e) => setCourse(e.target.value)}
+            onChange={(e) => setCourse(sanitizeInput(e.target.value))}
           />
 
           <Button type="submit" className="w-full" disabled={loading}>

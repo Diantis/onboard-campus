@@ -41,6 +41,7 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/",
+    "/public/agenda",
     "/profil",
     "/agenda",
     "/map",
