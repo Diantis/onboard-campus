@@ -85,6 +85,7 @@ export default function RegisterCard() {
             value={name}
             onChange={(e) => setName(sanitizeInput(e.target.value))}
             required
+            placeholder="ex. Jean Dupont"
           />
 
           <Label htmlFor={`${id}-email`}>Email</Label>
@@ -94,6 +95,7 @@ export default function RegisterCard() {
             value={email}
             onChange={(e) => setEmail(sanitizeInput(e.target.value))}
             required
+            placeholder="ex. jean.dupont@email.com"
           />
 
           <Label htmlFor={`${id}-password`}>{t("Login.Password")}</Label>
@@ -103,6 +105,7 @@ export default function RegisterCard() {
             value={password}
             onChange={(e) => setPassword(sanitizeInput(e.target.value))}
             required
+            placeholder="Min. 8 caractères, le point-virgule (;) n'est pas autorisé "
           />
 
           <Label htmlFor={`${id}-ine`}>INE</Label>
@@ -110,6 +113,7 @@ export default function RegisterCard() {
             id={`${id}-ine`}
             value={ine}
             onChange={(e) => setIne(sanitizeInput(e.target.value))}
+            placeholder="ex. 1234567890A"
           />
 
           <Label htmlFor={`${id}-year`}>{t("Login.Year")}</Label>
@@ -124,6 +128,7 @@ export default function RegisterCard() {
             id={`${id}-course`}
             value={course}
             onChange={(e) => setCourse(sanitizeInput(e.target.value))}
+            placeholder="ex. Developpement Web"
           />
 
           <Button type="submit" className="w-full" disabled={loading}>
